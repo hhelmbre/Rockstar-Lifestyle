@@ -1,19 +1,29 @@
-Use Cases
-Who is using this: Scientists working with protein images
+Use Case #1:
+Classify the protein domains for a given image supplied by the user based a model.
 
-What is the situation for using it: If you want to quickly obtain characteristic and possibly classification information about your proteins.
+Components:
+model
+image upload
+Protein characterization based on patterning
+Fourier Transform
+Gaussian Blur
+Multi-scale Histogram
+Patterning transforms (to obtain more information from the Multi-scale Histogram)
 
-Where is this used: Python package that can be run on any personal computer for educational uses
+Use Case #2: 
+Provide protein characterization for a given image supplied by the user. 
 
-When is this used: Preferably we would run all our protein images through the software to obtain some object, edge and texture feature data quantitatively.
+Components:
+Image input
+Fourier Transform
+Gaussian Blur
+Multi-scale histogram
+Edge Statistics
+Object Statistics
 
-Why is this being used: We are attempting to make a succinct and simple package that extracts quantitative data about proteins from Nance Lab in order to provide a better understanding of how proteins work in your images.
+Use Case #3:
+Train the machine learning model to predict the right classification given the set of images.
 
-How is this used:
-???
-
-Packages:
-
-1. Fourier transform
-2. Wavelet transform
-3. Image import Packages
+Components: 
+model
+a set of images
