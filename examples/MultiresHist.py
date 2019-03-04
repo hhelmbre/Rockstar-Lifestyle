@@ -20,6 +20,12 @@ def image_prep():
     pass
 
 #Function 3: Gaussian Filter Application
+#Input 1: the image that the filter will be applied
+#Input 2: the list of gaussian blur levels that will be applied
+
+#Functionality: applies a loop that goes through the gauss blur lists
+
+#initializes the gauss_blurs list for appending later
 gauss_blurs = []
 def gauss_filter(image, gauss_blur_list):
     for levels in gauss_blur_list:
@@ -33,11 +39,12 @@ def gauss_filter(image, gauss_blur_list):
 #Function 5: Obtaining Histograms
 #need to have variable bins functionality as well
 hist = []
-def cumulative_hist(gauss_blur_list, bin_list):
-    for bin_count in bin_list:
-        fig = plt.figure()
-        hist_itt = plt.hist(gauss_blur_list, bins=bin_count, density = True, cumulative = True)
-        hist.append(hist_itt)
+def cumulative_hist(gauss_blur_images, bin_list):
+    for images in gauss_blur_images:
+        for bin_count in bin_list:
+            fig = plt.figure()
+            hist_itt = plt.hist(images, bins=bin_count, density = True, cumulative = True)
+            hist.append(hist_itt)
     return hist
 
 #Function 6: Obtaining difference histograms between two cumulative histograms
