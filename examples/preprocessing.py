@@ -8,7 +8,7 @@ def color_split():
     pass
 
 #Function X: To change image contrast
-def im_contrast(image, contrast_value)
+def im_contrast(image, contrast_value):
     img = Image.fromarray(image)
     img = img.convert("L")
     enhancer = ImageEnhance.Contrast(img)
