@@ -9,8 +9,8 @@ from matplotlib import pyplot as plt
 #Inputs: images
 #Outputs: magntidue spectrum array
 def Magnitude_Spectrum(image):
-    f = np.fft.fft2(image)
-    fshift= np.fft.fftshift(f)
+    """peforms the fourier transform and returns the fshift which is used within filter functions"""
+    fshift = fourier_fshift(image)
     m_spec= np.log(np.abs(fshift))
     return m_spec
 
@@ -20,10 +20,9 @@ def Magnitude_Spectrum(image):
 #Outputs: fshift
 def fourier_fshift(image):
     """peforms the fourier transform and returns the fshift which is used within filter functions"""
-        f = np.fft.fft2(image)
-        fshift= np.fft.fftshift(f)
-        m_spec= np.log(np.abs(fshift))
-        return fshift
+    f = np.fft.fft2(image)
+    fshift= np.fft.fftshift(f)
+    return fshift
 
 #Function 2: Plotting the magnitude spectrum made my fourier transformM
 #Steps: plots the Magnitude Spectrum
@@ -33,4 +32,4 @@ def Plot_M_Spec(m_spec):
     plt.imshow(m_spec, cmap = 'gray')
     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
     plt.show()
-    return 
+    return
