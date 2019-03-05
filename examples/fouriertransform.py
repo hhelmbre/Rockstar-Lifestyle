@@ -14,6 +14,17 @@ def Magnitude_Spectrum(image):
     m_spec= np.log(np.abs(fshift))
     return m_spec
 
+#Function 1: Performs the fourier transform with steps to get fshift - used within filter functions
+#Steps: fourier transform, fourier shift, gets the magnitude Spectrum
+#Inputs: images
+#Outputs: fshift
+def fourier_fshift(image):
+    """peforms the fourier transform and returns the fshift which is used within filter functions"""
+        f = np.fft.fft2(image)
+        fshift= np.fft.fftshift(f)
+        m_spec= np.log(np.abs(fshift))
+        return fshift
+
 #Function 2: Plotting the magnitude spectrum made my fourier transformM
 #Steps: plots the Magnitude Spectrum
 #Input: the magnitude spectrum Output
@@ -22,4 +33,4 @@ def Plot_M_Spec(m_spec):
     plt.imshow(m_spec, cmap = 'gray')
     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
     plt.show()
-    return
+    return 
