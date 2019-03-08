@@ -152,7 +152,10 @@ def band_pass_filter(image, radius):
     bpf_im = np.abs(bpf_im)
     return bpf_im
 
-
+#Function 6: Plotting the input image and the band pass filter image for comparison
+#Steps: plots the input image, plot band pass filter image
+#Input: input image and desired radius for filter mask
+#Output: none it just shows the image for funsies
 def BPF_compare(image, radius):
     """plots the band pass filter versus the input image"""
 #create subplot
