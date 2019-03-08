@@ -28,4 +28,5 @@ def test_LPF_compare(image, radius):
 
 def test_band_pass_filter(image, radius):
     """tests band pass filter function"""
-    
+     band_pass_filter(image,radius)
+     return
