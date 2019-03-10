@@ -15,7 +15,7 @@ def test_high_pass_filter():
     radius = 80
     assert isinstance(radius, int)
     #assert isinstance(image, Image.fromarray), "input is the wrong form"
-    hpf_image = Filter_Functions.high_pass_filter(image, radius) #runs the Function
+    hpf_image = Filter_functions.high_pass_filter(image, radius) #runs the Function
     assert isinstance(hpf_image, numpy.ndarray), "output is the wrong form"
     return hpf_image
 #
