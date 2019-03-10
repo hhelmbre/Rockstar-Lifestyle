@@ -66,10 +66,10 @@ def HPF_compare(image, radius):
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
 #Inputs: image and desired radius (used to change the starkness of the lines)
 #Outputs: image that has been filtered
-def low_pass_filter(image, radius):
+def low_pass_filter(image, radius, desired_color):
     """takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
 #forier transform the image and return fshift
-    fshift = fouriertransform.fourier_fshift(image)
+    fshift = fouriertransform.color_split(image, desired color)
 
 #we will build an array that is covers the entire image as a mask
 #determines the pixels in the rows and columns
@@ -90,7 +90,7 @@ def low_pass_filter(image, radius):
     zeros_mask[ones_circle] = 1
 
 # we still need to apply the mask to the fourier transform
-    lpf_fshift = fshift[512,512] * zeros_mask
+    lpf_fshift = fshift * zeros_mask
 #now we need to revert the image array with mask applied back to a viewable image first with an inverse shift to move the componets to the correct locations
     lpf_revert = np.fft.ifftshift(lpf_fshift)
 #then with a reverse forier transform

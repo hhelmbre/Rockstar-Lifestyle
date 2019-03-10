@@ -31,7 +31,8 @@ def test_low_pass_filter():
     """takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
-    lpf_image = filter_functions.low_pass_filter(image, radius)
+    desired_color = "b"
+    lpf_image = filter_functions.low_pass_filter(image, radius, desired_color)
     #fshift = fouriertransform.fourier_fshift(image)
     assert isinstance(image, image), "input is the wrong form"
     return lpf_im
