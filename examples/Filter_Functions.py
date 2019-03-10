@@ -1,10 +1,8 @@
-#Purpose
-
+#Purpose: create filters to go over images in an effort to extract infomation about them
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
-%matplotlib inline
-
+import fouriertransform
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
@@ -13,7 +11,7 @@ from matplotlib import pyplot as plt
 def high_pass_filter(image, radius):
     """takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
 #forier transform the image and return fshift
-    fourier_fshift(image)
+    fshift = fouriertransform.fourier_fshift(image)
 
 #building an array that covers the entire image as a mask
 #determines the pixels in the rows and columns
@@ -71,7 +69,7 @@ def HPF_compare(image, radius):
 def low_pass_filter(image, radius):
     """takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
 #forier transform the image and return fshift
-    fourier_fshift(image)
+    fshift = fouriertransform.fourier_fshift(image)
 
 #we will build an array that is covers the entire image as a mask
 #determines the pixels in the rows and columns
@@ -92,7 +90,7 @@ def low_pass_filter(image, radius):
     zeros_mask[ones_circle] = 1
 
 # we still need to apply the mask to the fourier transform
-    lpf_fshift = fshift * zeros_mask
+    lpf_fshift = fshift[512,512] * zeros_mask
 #now we need to revert the image array with mask applied back to a viewable image first with an inverse shift to move the componets to the correct locations
     lpf_revert = np.fft.ifftshift(lpf_fshift)
 #then with a reverse forier transform
@@ -131,7 +129,7 @@ def band_pass_filter(image, radiusin, radiusout):
     """takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied """
 
 #forier transform the image and return fshift
-    fourier_fshift(image)
+    fshift = fouriertransform.fourier_fshift(image)
 
 #we will build an array that is covers the entire image as a mask
 #determines the pixels in the rows and columns
