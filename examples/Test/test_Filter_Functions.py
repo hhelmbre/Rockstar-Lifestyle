@@ -1,6 +1,6 @@
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib as plt
 import preprocessing
 import filter_functions
 import fouriertransform
@@ -34,7 +34,7 @@ def test_low_pass_filter():
     desired_color = "b"
     lpf_image = filter_functions.low_pass_filter(image, radius, desired_color)
     #fshift = fouriertransform.fourier_fshift(image)
-    assert isinstance(image, image), "input is the wrong form"
+    #assert isinstance(image, image), "input is the wrong form"
     return lpf_im
 #
 # def test_LPF_compare(image, radius):

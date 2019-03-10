@@ -1,7 +1,7 @@
 #Purpose: create filters to go over images in an effort to extract infomation about them
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib as plt
 import fouriertransform
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
