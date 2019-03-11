@@ -2,7 +2,8 @@
 
 #import necessary packages
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib as plt
+from PIL import Image, ImageFilter, ImageEnhance
 
 #Function 1: Performs the fourier transform with steps to get Magnitude_Spectrum
 #Steps: fourier transform, fourier shift, gets the magnitude Spectrum
@@ -42,26 +43,28 @@ def Plot_M_Spec(m_spec):
 def color_split(image, desired_color):
     """splits the image into r or g or b color frequency then performs a fshift for that color"""
 #splits the image into the rbg componetnts
-    r,g,b = im_color.split()
+    image_color = Image.open('Test_Photo_fromMike.png')
+    r,g,b = image_color.split()
 #if tree split based on desired color
-    if desired_color = "b"
+    if desired_color == "b":
     #creates shift for blue
         f_blue = np.fft.fft2(b)
         fshift_blue = np.fft.fftshift(f_blue)
         m_spec_blue = np.log(np.abs(fshift_blue))
         fshift = fshift_blue
-    elif desired_color = "g"
+    elif desired_color == "g":
     #creates shift for green
         f_green = np.fft.fft2(g)
         fshift_green = np.fft.fftshift(f_green)
         m_spec_green = np.log(np.abs(fshift_green))
         fshift = fshift_green
-    elif desire_color = "r"
+    elif desire_color == "r":
     #creates shfit for red
         f_red = np.fft.fft2(g)
         fshift_red = np.fft.fftshift(f_red)
         m_spec_red = np.log(np.abs(fshift_red))
         fshift = fshift_red
     #encompasses the rest of the inputs that do not work
-    else print('that desired color is not available')
+    else:
+         print('that desired color is not available')
     return(fshift)
