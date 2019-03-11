@@ -43,7 +43,7 @@ def pixel_counter_single_image(array, array_index):
         else:
             obj += 1
     print('object=' + str(obj) + ', black=' +str(black))
-
+    return
 
 
 
