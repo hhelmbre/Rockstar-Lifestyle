@@ -1,0 +1,16 @@
+coverage==4.5.2
+coveralls
+pytest==4.1.0
+numpy
+scipy
+pandas
+scikit-image
+sklearn
+shapely
+numpydoc
+matplotlib
+seaborn
+Shapely
+tifffile
+fijibin
+PIL
