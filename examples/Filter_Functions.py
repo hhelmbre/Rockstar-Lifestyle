@@ -1,8 +1,9 @@
 #Purpose: create filters to go over images in an effort to extract infomation about them
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
-import matplotlib as plt
+from matplotlib import pyplot as plt
 import fouriertransform
+import Filter_Functions
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
@@ -46,18 +47,18 @@ def high_pass_filter(image, radius, desired_color):
 #Steps: plots the input image, plot high pass filter image
 #Input: input image and desired radius for filter mask
 #Output: none it just shows the image for funsies
-def HPF_compare(image, radius):
+def HPF_compare(image, radius, desired_color):
     """Plots the image and the high pass filter image for comparison"""
-    high_pass_filter(image, radius)
+    hpf_image = Filter_Functions.high_pass_filter(image, radius, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (15,15))
 #plot input image
     ax = axs[0]
-    ax.imshow(b)
+    ax.imshow(image)
     ax.set_title('Input')
 #plot high pass filter
     ax = axs[1]
-    ax.imshow(hpf_im)
+    ax.imshow(hpf_image)
     ax.set_title('High Pass Filter')
     return
 
@@ -107,23 +108,23 @@ def low_pass_filter(image, radius, desired_color):
 #Output: none it just shows the image for funsies
 def LPF_compare(image, radius):
     """Plots the image and the low pass filter image for comparison"""
-    low_pass_filter(image, radius)
+    lpf_image = Filter_Functions.low_pass_filter(image, radius, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (15,15))
 #plot input image
     ax = axs[0]
-    ax.imshow(b)
+    ax.imshow(image)
     ax.set_title('Input')
 #plot high pass filter
     ax = axs[1]
-    ax.imshow(hpf_im)
+    ax.imshow(lpf_image)
     ax.set_title('Low Pass Filter')
     return
 
 
 #Function 5: Performs a Band Pass Filter and returns the modifed image
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
-#Inputs: image and desired radius (used to change the starkness of the lines)
+#Inputs: image and desired internal and external radius (used to change the starkness of the lines), as well as the desired color from the color split
 #Outputs: image that has been filtered
 def band_pass_filter(image, radiusin, radiusout, desired_color):
     """takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied """
@@ -162,18 +163,20 @@ def band_pass_filter(image, radiusin, radiusout, desired_color):
 
 #Function 6: Plotting the input image and the band pass filter image for comparison
 #Steps: plots the input image, plot band pass filter image
-#Input: input image and desired radius for filter mask
+#Inputs: Image and desired internal and external radius (used to change the starkness of the lines), as well as the desired color from the color split
 #Output: none it just shows the image for funsies
-def BPF_compare(image, radius):
+def BPF_compare(image, radiusin, radiusout, desired_color):
     """plots the band pass filter versus the input image"""
+#gets the bpf image
+    bpf_image = Filter_Functions.band_pass_filter(image, radiusin, radiusout, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (30,30))
 #plot input image
     ax = axs[0]
-    ax.imshow(b)
+    ax.imshow(image)
     ax.set_title('Input')
 #plot high pass filter
     ax = axs[1]
-    ax.imshow(bpf_im)
+    ax.imshow(bpf_image)
     ax.set_title('Band Pass Filter')
     return

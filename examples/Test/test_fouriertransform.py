@@ -27,14 +27,17 @@ def test_fourier_fshift():
     assert isinstance(image, Image.Image), "input is in the wrong form"
     assert isinstance(fshift, np.ndarray), "output is in the wrong form"
     return fshift
-#
+
 # #Function 3: Test of Plot_M_Spec
-# def test_Plot_M_Spec(m_spec):
-#     plt.imshow(m_spec, cmap = 'gray')
-#     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
-#     plt.show()
+# def test_Plot_M_Spec():
+# #inputs for functions
+#     image = Image.open('Test_Photo_fromMike.png').convert('L')
+# #runs function
+#     fouriertransform.Plot_M_Spec(image)
+# #asserts and checks
+#     assert isinstance(image, Image.Image), "input is in the wrong form"
 #     return
-#
+
 
 #Function 4: Test of color_split
 def test_color_split():

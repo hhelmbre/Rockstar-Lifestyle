@@ -2,7 +2,9 @@
 
 #import necessary packages
 import numpy as np
-import matplotlib as plt
+#import matplotlib as plt
+#matplotlib.use("TkAgg")
+from matplotlib import pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 
 #Function 1: Performs the fourier transform with steps to get Magnitude_Spectrum
@@ -30,7 +32,7 @@ def fourier_fshift(image):
 #Input: the magnitude spectrum Output
 #Output: none it just shows the image for funsies
 def Plot_M_Spec(m_spec):
-    plt.imshow(m_spec, cmap = 'gray')
+    plt.show(m_spec, cmap = 'gray')
     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
     plt.show()
     return
