@@ -14,12 +14,10 @@ def test_high_pass_filter():
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
-    filter_functions.high_pass_filter(image, radius) #runs the Function
-    fouriertransform.fourier_fshift(image)
-    assert isinstance(radius, int)
-    #assert isinstance(image, Image.fromarray), "input is the wrong form"
-
-    assert isinstance(hpf_image, numpy.ndarray), "output is the wrong form"
+    hpf_image = filter_functions.high_pass_filter(image, radius, desired_color) #runs the Function
+    assert isinstance(radius, int), "input is the wrong form"
+    assert isinstance(desired_color, str), "input is the wrong form"
+    assert isinstance(hpf_image, np.ndarray), "output is the wrong form"
     return hpf_image
 #
 # def test_HPF_compare(image, radius):
@@ -28,12 +26,11 @@ def test_high_pass_filter():
 #     return
 #
 def test_low_pass_filter():
-    """takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
+    """tests low pass filter function """
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
     lpf_image = filter_functions.low_pass_filter(image, radius, desired_color)
-    #fshift = fouriertransform.fourier_fshift(image)
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input needs to be a string called r or g or b"
     assert isinstance(lpf_image, np.ndarray), "output is in the wrong form"
@@ -44,10 +41,14 @@ def test_low_pass_filter():
 #     low_pass_filter(image, radius)
 #     return
 #
-# def test_band_pass_filter(image, radius):
-#     """tests band pass filter function"""
-# image = Image.open('Test_Photo_fromMike.png')
-#   radiusin = 50
-#   radiusout = 100#
-#   bfp_image = filter_funciton.band_pass_filter(image,radius)
-#      return
+def test_band_pass_filter():
+    """tests band pass filter function"""
+    image = Image.open('Test_Photo_fromMike.png')
+    radiusin = 50
+    radiusout = 100#
+    desired_color = "b"
+    bpf_image = filter_functions.band_pass_filter(image, radiusin, radiusout, desired_color)
+    assert isinstance(radius, int), "input is the wrong form"
+    assert isinstance(desired_color, str), "input needs to be a string called r or g or b"
+    assert isinstance(bpf_image, np.ndarray), "output is in the wrong form"
+    return

@@ -8,7 +8,7 @@ import fouriertransform
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
 #Inputs: image and desired radius (used to change the starkness of the lines)
 #Outputs: image that has been filtered
-def high_pass_filter(image, radius):
+def high_pass_filter(image, radius, desired_color):
     """takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
 #forier transform the image and return fshift
     fshift = fouriertransform.color_split(image, desired_color)
@@ -38,7 +38,7 @@ def high_pass_filter(image, radius):
 #then with a reverse forier transform
     hpf_image = np.fft.ifft2(hpf_revert)
 #takes absolute value of the frequency
-    hpf_image = np.abs(hpf_im)
+    hpf_image = np.abs(hpf_image)
     return hpf_image
 
 
@@ -125,7 +125,7 @@ def LPF_compare(image, radius):
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
 #Inputs: image and desired radius (used to change the starkness of the lines)
 #Outputs: image that has been filtered
-def band_pass_filter(image, radiusin, radiusout):
+def band_pass_filter(image, radiusin, radiusout, desired_color):
     """takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied """
 
 #forier transform the image and return fshift
@@ -155,10 +155,10 @@ def band_pass_filter(image, radiusin, radiusout):
 #now we need to revert the image array with mask applied back to a viewable image first with an inverse shift to move the componets to the correct locations
     bpf_revert = np.fft.ifftshift(bpf_fshift)
 #then with a reverse forier transform
-    bpf_im = np.fft.ifft2(bpf_revert)
+    bpf_image = np.fft.ifft2(bpf_revert)
 #takes absolute value of the frequency
-    bpf_im = np.abs(bpf_im)
-    return bpf_im
+    bpf_image = np.abs(bpf_image)
+    return bpf_image
 
 #Function 6: Plotting the input image and the band pass filter image for comparison
 #Steps: plots the input image, plot band pass filter image
