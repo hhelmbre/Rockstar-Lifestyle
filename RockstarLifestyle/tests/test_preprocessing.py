@@ -8,19 +8,20 @@ import scipy
 from RockstarLifestyle import preprocessing
 from RockstarLifestyle import fouriertransform
 
-#Function 1: Test of im_contrast
-def test_im_contrast():
+#Function 1: Test of im_contrast from preprocessing
+def test_image_contrast():
+    """Test: increases the contrast in order to make possible fourier transforms smoother"""
 #inputs for functions
     image = Image.open('Test_Photo_fromMike.png')
     contrast_value = 2
 #function performance
-    enhanced_im = preprocessing.im_contrast(image, contrast_value)
+    enhanced_image = preprocessing.image_contrast(image, contrast_value)
 #asserts and checks
-    return enhanced_im
+    return enhanced_image
 
-#Function 2: Test of color_split_fshift
+#Function 2: Test of color_split_fshift from preprocessing
 def test_color_split_fshift():
-    """test of a function which splits the image into r or g or b color frequency then performs a fshift for that color"""
+    """Test: splits the image into r or g or b color frequency then performs a fshift for that color"""
 # inputs for the function
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'b'
@@ -32,9 +33,9 @@ def test_color_split_fshift():
     assert isinstance(fshift, np.ndarray), "output is in the wrong form"
     return(fshift)
 
-#Function 5: Test of color_split_image
+#Function 5: Test of color_split_image from preprocessing
 def test_color_split_image():
-    """test of a function which splits the image into r or g or b color frequency then performs a fshift for that color"""
+    """Test: splits the image into r or g or b color frequency then produces the desired color image"""
 # inputs for the function
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'b'

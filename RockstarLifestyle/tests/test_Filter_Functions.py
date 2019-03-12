@@ -9,7 +9,7 @@ from RockstarLifestyle import preprocessing
 
 #Function 1: Test of high pass filter function from filter_functions
 def test_high_pass_filter():
-    """takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
+    """Test: takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
 #inputs for the functions
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -23,9 +23,9 @@ def test_high_pass_filter():
     assert isinstance(hpf_image, np.ndarray), "output is the wrong form"
     return hpf_image
 
-#Function 2: Test of band pass filter functions from filter_functions
+#Function 2: Test of HPF compare functions from filter_functions
 def test_HPF_compare():
-    """Plots the image and the high pass filter image for comparison"""
+    """Test: Plots the image and the high pass filter image for comparison"""
 #inputs for the functions
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -40,7 +40,7 @@ def test_HPF_compare():
 
 #Function 3: Test of low pass filter function from filter_functions
 def test_low_pass_filter():
-    """tests low pass filter function """
+    """Test: takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
 #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -54,9 +54,9 @@ def test_low_pass_filter():
     assert isinstance(lpf_image, np.ndarray), "output is in the wrong form"
     return lpf_image
 
-#Function 4: Test of band pass filter functions from filter_functions
+#Function 4: Test of LPG compare functions from filter_functions
 def test_LPF_compare():
-    """Plots the image and the low pass filter image for comparison"""
+    """Test: Plots the image and the low pass filter image for comparison"""
 #input for function
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -69,7 +69,7 @@ def test_LPF_compare():
 
 #Function 5: Test of band pass filter functions from filter_functions
 def test_band_pass_filter():
-    """tests band pass filter function"""
+    """Test: takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied"""
 #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radiusin = 50
@@ -85,9 +85,9 @@ def test_band_pass_filter():
     assert isinstance(bpf_image, np.ndarray), "output is in the wrong form"
     return
 
-#Function 6: Test of band pass filter functions from filter_functions
+#Function 6: Test of BPF comparison function from filter_functions
 def test_BPF_compare():
-    """Plots the image and the low pass filter image for comparison"""
+    """Test: Plots the image and the low pass filter image for comparison"""
 #function Inputs
     image = Image.open('Test_Photo_fromMike.png')
     radiusin = 50

@@ -10,7 +10,7 @@ from RockstarLifestyle import Image_training_rectangles
 
 # From Image Training Circles Function Folders:
 
-#Function 1: Test of image generator for the circles
+#Function 1: Test of image generator for the circles from Image_training_circles
 def test_image_generator_circles():
     """Test: Generates a number of images with random circles on a background"""
 #function Inputs
@@ -22,7 +22,7 @@ def test_image_generator_circles():
     assert isinstance(imgarray, list), "output is in the wrong form"
     return imgarray
 
-#Function 2: Test of the pixel counter for the circles
+#Function 2: Test of the pixel counter for the circles from Image_training_circles
 def test_pixel_counter_single_image_circles():
     """Test: Counts the number of pixels for individual circle images"""
 #function Inputs
@@ -40,7 +40,7 @@ def test_pixel_counter_single_image_circles():
     assert black + obj_normalized * 69 == 62500, "the total number of objects (black pixels plus white pixels) is not correct"
     return
 
-#Function 3: Test of the pixel counter for all arrays
+#Function 3: Test of the pixel counter for all circle arrays from imag-Image_training_circles
 def test_pixel_counter_whole_array_circles():
     """Test: Counts the number of pixels for the array of circle images"""
 #function Inputs
@@ -58,7 +58,7 @@ def test_pixel_counter_whole_array_circles():
 
 
 #From Image Training Pixels function filter
-#Function 4
+#Function 4: Test of random image pixel generator from Image_training_rectangles
 def test_random_image_generator():
     """Test: Generates a number of images with randomized white pixels on a black
 background"""
@@ -71,7 +71,7 @@ background"""
     assert isinstance(imgarray, list), "output is in the wrong form"
     return imgarray
 
-#Function 4: Test of random pixel counter
+#Function 5: Test of random pixel counter from Image_training_pixels
 def test_pixel_counter_single_image():
     """Counts the number of colored pixels for a single image"""
     #function Inputs
@@ -88,9 +88,9 @@ def test_pixel_counter_single_image():
     return black, obj
 
 
-#Function 5: Test of random pixel counter for whole array
+#Function 6: Test of random pixel counter for whole array from Image_training_pixels
 def test_pixel_counter_whole_array():
-    """Counts the number of pixels for """
+    """Test: Counts the number of colored pixels for a single image"""
 #function Inputs
     n = 2
     array = Image_training_pixels.random_image_generator(n)
@@ -105,9 +105,9 @@ def test_pixel_counter_whole_array():
 
 
 # From Image Training Rectangles
-#Function 6: Test of image rectangle generator
+#Function 7: Test of image rectangle generator from Image_training_rectangles
 def test_image_generator_rectangles():
-    """Generates a number of images with random rectangles on abackground"""
+    """Test: Generates a number of images with random rectangles on abackground"""
 #function Inputs
     n = 2
 #function performance
@@ -117,7 +117,7 @@ def test_image_generator_rectangles():
     assert isinstance(imgarray, list), "output is in the wrong form"
     return imgarray
 
-#Function 7: Test of pixel counter for rectangles
+#Function 8: Test of pixel counter for a rectangle image from test_image_generator_rectangles
 def test_pixel_counter_single_image_rectangles():
     """Test: Counts the number of pixels for individual rectangle images"""
     #function Inputs
@@ -134,7 +134,7 @@ def test_pixel_counter_single_image_rectangles():
     return black, obj_normalized
 
 
-#Function 8: Test of pixel counter for every image requested
+#Function 9: Test of pixel counter for all images of rectangles from Image_training_rectangles
 def test_pixel_counter_whole_array_rectangles():
     """Test: Counts the number of pixels for the array of rectangle images"""
     #function Inputs

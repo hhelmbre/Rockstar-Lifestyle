@@ -6,15 +6,15 @@ import scipy
 
 
 #Function 1: enhances the contrast on the image and produces and enhanced image
-#Steps: creates an image from an image array - converts to gray scale and inhances the contrast
-#Input: image array and desired contrast value
+#Steps: converts an image to gray scale and inhances the contrast
+#Input: image and desired contrast value
 #Output: enhaced image
-def im_contrast(image, contrast_value):
-    img = Image.fromarray(image)
-    img = img.convert("L")
-    enhancer = ImageEnhance.Contrast(img)
-    enhanced_im = enhancer.enhance(contrast_value)
-    return enhanced_im
+def image_contrast(image, contrast_value):
+    """Increases the contrast in order to make possible fourier transforms smoother"""
+    image = image.convert("L")
+    enhancer = ImageEnhance.Contrast(image)
+    enhanced_image = enhancer.enhance(contrast_value)
+    return enhanced_image
 
 
 #Function 2: Splits the image into rgb components and creates shifts and magnitudes for them
