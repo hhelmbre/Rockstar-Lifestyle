@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #from function files
-import Image_training_pixels
+from RockstarLifestyle import Image_training_pixels
 
 #Function 1: Generates a inputed number of images with random white pixels on a black background
 #Steps: set seed, create a loop through requested number of images creating the Pixels on the background

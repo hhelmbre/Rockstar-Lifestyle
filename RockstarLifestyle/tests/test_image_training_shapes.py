@@ -4,9 +4,9 @@ from PIL import Image, ImageDraw
 from random import randint
 
 #import function packages
-import Image_training_circles
-import Image_training_pixels
-import Image_training_rectangles
+from RockstarLifestyle import Image_training_circles
+from RockstarLifestyle import Image_training_pixels
+from RockstarLifestyle import Image_training_rectangles
 
 # From Image Training Circles Function Folders:
 

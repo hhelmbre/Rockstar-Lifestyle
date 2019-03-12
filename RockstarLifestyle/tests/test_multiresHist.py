@@ -8,7 +8,7 @@ from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
 from RockstarLifestyle import MultiresHist
-From RockstarLifestyle import fouriertransform
+from RockstarLifestyle import preprocessing
 
 #Function 1: Test of Image Importing
 
@@ -19,7 +19,7 @@ def test_gauss_filter():
 #inputs for functions
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
-    image = fouriertransform.color_split_image(image, desired_color)
+    image = preprocessing.color_split_image(image, desired_color)
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
 #function running
     gauss_blurs = MultiresHist.gauss_filter(image, gauss_blur_list)
@@ -33,7 +33,7 @@ def test_cumulative_hist():
 #inputs for function
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
-    image = fouriertransform.color_split_image(image, desired_color)
+    image = preprocessing.color_split_image(image, desired_color)
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
     gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
     bin_list = [3] #number of bins desired for histogram

@@ -1,10 +1,12 @@
+#Purpose - generates a series of images wiht random rectangles in order to be used for training purposes
+#import external packages
 import numpy as np
 import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
-#From function files
-import Image_training_pixels
-import Image_training_rectangles
+#import internal packages
+from RockstarLifestyle import Image_training_pixels
+from RockstarLifestyle import Image_training_rectangles
 
 #Function 1: Generates a inputed number of images with random white rectables on a black background
 #Steps: set seed, create a loop through requested number of images creating the rectangles on the background

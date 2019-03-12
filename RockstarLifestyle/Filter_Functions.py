@@ -1,9 +1,12 @@
 #Purpose: create filters to go over images in an effort to extract infomation about them
+#import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
-import fouriertransform
-import Filter_Functions
+#import internal packages
+from RockstarLifestyle import fouriertransform
+from RockstarLifestyle import Filter_Functions
+from RockstarLifestyle import preprocessing
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
@@ -12,7 +15,7 @@ import Filter_Functions
 def high_pass_filter(image, radius, desired_color):
     """takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
 #forier transform the image and return fshift
-    fshift = fouriertransform.color_split_fshift(image, desired_color)
+    fshift = preprocessing.color_split_fshift(image, desired_color)
 
 #building an array that covers the entire image as a mask
 #determines the pixels in the rows and columns
@@ -70,7 +73,7 @@ def HPF_compare(image, radius, desired_color):
 def low_pass_filter(image, radius, desired_color):
     """takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
 #forier transform the image and return fshift
-    fshift = fouriertransform.color_split_fshift(image, desired_color)
+    fshift = preprocessing.color_split_fshift(image, desired_color)
 
 #we will build an array that is covers the entire image as a mask
 #determines the pixels in the rows and columns
@@ -130,7 +133,7 @@ def band_pass_filter(image, radiusin, radiusout, desired_color):
     """takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied """
 
 #forier transform the image and return fshift
-    fshift = fouriertransform.color_split_fshift(image, desired_color)
+    fshift = preprocessing.color_split_fshift(image, desired_color)
 
 #we will build an array that is covers the entire image as a mask
 #determines the pixels in the rows and columns

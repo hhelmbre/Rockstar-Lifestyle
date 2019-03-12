@@ -1,9 +1,6 @@
 #Purpose: To perform the fourier transform
-
 #import necessary packages
 import numpy as np
-#import matplotlib as plt
-#matplotlib.use("TkAgg")
 from matplotlib import pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 
