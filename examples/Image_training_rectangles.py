@@ -54,8 +54,8 @@ def pixel_counter_whole_array_rectangles(array):
 	i = 0
 	pixel_count = pd.DataFrame(columns=['Index','Object','Black','Total']) #Creates dataframe for storing count data
 	for i in range(0,len(array)): #counts through the 'images' in the given array
+	black, obj = Image_training_rectangles.pixel_counter_single_image_rectangles(array, array_index)
 		array_index = i
-		black, obj = Image_training_rectangles.pixel_counter_single_image_rectangles(array, array_index)
 		obj_normalized = obj/(25) #normalizes the number of pixels per square
 		total = black + obj #sums up the number of pixels counted. Images are 250x250 so 62500 pixels should be counted.
 		pixel_count.loc[i] = [i, obj_normalized, black, total] #updates the dataframe with the counts
