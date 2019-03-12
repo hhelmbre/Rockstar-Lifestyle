@@ -8,7 +8,7 @@ from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
 from RockstarLifestyle import MultiresHist
-From RockstarLifestyle import fouriertransform
+from RockstarLifestyle import fouriertransform
 
 #Function 1: Test of Image Importing
 
