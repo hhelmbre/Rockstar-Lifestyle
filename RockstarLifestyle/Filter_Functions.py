@@ -104,7 +104,6 @@ def low_pass_filter(image, radius, desired_color):
     return lpf_im
 
 
-
 #Function 3: Plotting the input image and the low pass filter image for comparison
 #Steps: plots the input image, plot low pass filter image
 #Input: input image and desired radius for filter mask

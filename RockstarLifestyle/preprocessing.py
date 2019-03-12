@@ -10,6 +10,7 @@ import scipy
 #Input: image and desired contrast value
 #Output: enhaced image
 def image_contrast(image, contrast_value):
+    """Increases the contrast in order to make possible fourier transforms smoother"""
     image = image.convert("L")
     enhancer = ImageEnhance.Contrast(image)
     enhanced_image = enhancer.enhance(contrast_value)
