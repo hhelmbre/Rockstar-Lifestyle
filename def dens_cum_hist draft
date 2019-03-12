@@ -1,0 +1,40 @@
+
+# This file manipulates the matplotlib hist function located in _axes.py subfolder.
+# It will output only the data portion of the plt.hist() function. I'm still working this out,
+# but it's needed in order to develop large sets of data in the same form as matplotlib output
+# (otherwise, the regular function will output 3 figures for every image which would cause
+# crashing)
+
+def dens_cum_hist(x, bins=None):
+    x = cbook._reshape_2D(x, 'x')
+    nx = len(x)  # number of datasets
+    # Showing bins given is true
+    binsgiven = True
+    # Adding weights
+    w = [None] * nx
+    density = True
+    hist_kwargs = dict(range=None, density=density)
+    # List to store all the top coordinates of the histograms
+    tops = []
+    mlast = None
+    # Loop through datasets
+    for i in range(nx):
+        # this will automatically overwrite bins,
+        # so that each histogram uses the same bins
+        #m = [np.array([])]
+        m, bins = np.histogram(x[i], bins, density = True)
+
+        m = m.astype(float)  # causes problems later if it's an int
+
+        if mlast is None:
+            mlast = np.zeros(len(bins)-1, m.dtype)
+        m = np.sort(m)
+        #m = m/m[2]
+        print(m)
+        tops.append(m)
+    # for cummulative:
+    slc = slice(None)
+    if isinstance(cumulative, Number) and cumulative < 0:
+        slc = slice(None, None, -1)
+    tops = [(m * np.diff(bins))[slc].cumsum()[slc] for m in tops]
+    return tops
