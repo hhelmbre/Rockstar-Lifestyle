@@ -4,8 +4,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 import scipy
 
-def color_split():
-    pass
 
 #Function X: To change image contrast
 def im_contrast(image, contrast_value):

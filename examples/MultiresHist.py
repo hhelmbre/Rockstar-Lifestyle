@@ -6,16 +6,16 @@ import numpy as np
 from matplotlib import pyplot as plt
 import scipy
 from scipy.ndimage import gaussian_filter
-import MultiresHist as mult
+import MultiresHist
 import timeit
+import fouriertransform
 
 #Function 1: Importing images
 def image_import():
     pass
 
 #Function 2: Prepping the images
-## Splits the image by color
-##
+## Splits the image by color -- currently color_split in fourier functions(!!!)
 def image_prep():
     pass
 
@@ -33,7 +33,7 @@ def gauss_filter(image, gauss_blur_list):
         gauss_blurs.append(gauss_blur)
     return gauss_blurs
 
-#Function 5: Obtaining Histograms
+#Function 4: Obtaining Histograms
 #need to have variable bins functionality as well
 def cumulative_hist(gauss_blur_images, bin_list):
     hist = []
@@ -44,9 +44,17 @@ def cumulative_hist(gauss_blur_images, bin_list):
             hist.append(hist_itt)
     return hist
 
-#Funciton x: For determining plot 1 and plot 2
-def diff_plot_determination(hist):
-    pass
+#Function 5: Determines plot 1 and 2 from initial image, blur list, and bin list
+#Steps: load all input, run the cumulative_hist function and split the function into one and two
+#Inputs: intial image, blur list and bin list
+#Outputs: histogram plot one and two
+def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
+    image = fouriertransform.color_split_image(image, desired_color)
+    gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
+    hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
+    hist1_plot = hist[0]
+    hist2_plot = hist[1]
+    return hist1_plot, hist2_plot
 
 #Function 6: Obtaining difference histograms between two cumulative histograms
 def diff_hist(hist1_plot, hist2_plot):
@@ -70,8 +78,7 @@ def diff_hist(hist1_plot, hist2_plot):
 
 #Function 7:Function that concatenates the difference histograms
 
-#Function 8: Function that puts it all together and outputs the concatenated
-## histograms
+#Function 8: Function that puts it all together and outputs the concatenated histograms
 
 def Multi_res_hist_full(image, bin_list, gauss_blur_list):
     arr = np.array(image)
@@ -79,7 +86,7 @@ def Multi_res_hist_full(image, bin_list, gauss_blur_list):
     cumulative_Histograms = cumulative_hist(gauss_blur_images, bin_list)
     plt1=cumulative_Histograms[0]
     plt2=cumulative_Histograms[1]
-    heights = mult.diff_hist(plt1, plt2)
+    heights = MultiresHist.diff_hist(plt1, plt2)
     fig2 = plt.figure()
     ax1 = fig2.add_subplot(111)
 
