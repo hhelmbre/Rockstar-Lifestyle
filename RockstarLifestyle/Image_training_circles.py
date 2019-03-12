@@ -3,8 +3,8 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #from function files
-import Image_training_pixels
-import Image_training_circles
+from RockstarLifestyle import Image_training_pixels
+from RockstarLifestyle import Image_training_circles
 
 #Function 1: Generates a inputed number of images with random white circles on a black background
 #Steps: set seed, create a loop through requested number of images creating the circles on the background

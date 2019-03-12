@@ -1,14 +1,14 @@
 #Purpose: To hold functions used for the multiresolution histogram
-
 #Importing necessary packages
 from PIL import Image, ImageFilter
 import numpy as np
 from matplotlib import pyplot as plt
 import scipy
 from scipy.ndimage import gaussian_filter
-import MultiresHist
 import timeit
-import fouriertransform
+#import internal packages
+from RockstarLifestyle import MultiresHist
+from RockstarLifestyle import preprocessing
 
 #Function 1: Importing images
 def image_import():
@@ -49,7 +49,7 @@ def cumulative_hist(gauss_blur_images, bin_list):
 #Inputs: intial image, blur list and bin list
 #Outputs: histogram plot one and two
 def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
-    image = fouriertransform.color_split_image(image, desired_color)
+    image = preprocessing.color_split_image(image, desired_color)
     gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
     hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
     hist1_plot = hist[0]

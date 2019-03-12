@@ -5,10 +5,10 @@ from matplotlib import pyplot as plt
 import scipy
 
 
-#Function 1: Splits the image into rgb components and creates shifts and magnitudes for them
-#Steps: split into components, used inputs with if tree to create shifts and magnitude for desired color
-#Input: desired color and image
-#Output: desired color fshift
+#Function 1: enhances the contrast on the image and produces and enhanced image
+#Steps: creates an image from an image array - converts to gray scale and inhances the contrast
+#Input: image array and desired contrast value
+#Output: enhaced image
 def im_contrast(image, contrast_value):
     img = Image.fromarray(image)
     img = img.convert("L")

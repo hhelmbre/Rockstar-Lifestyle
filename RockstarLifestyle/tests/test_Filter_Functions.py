@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 #code files that are within the tests
 from RockstarLifestyle import Filter_Functions
 from RockstarLifestyle import fouriertransform
+from RockstarLifestyle import preprocessing
 
 #Function 1: Test of high pass filter function from filter_functions
 def test_high_pass_filter():
