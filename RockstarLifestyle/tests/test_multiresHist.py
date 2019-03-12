@@ -1,5 +1,4 @@
 #Purpose: To test functions used for the multiresolution histogram
-
 #Importing necessary packages
 from PIL import Image, ImageFilter
 import numpy as np
@@ -8,8 +7,8 @@ import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
-import MultiresHist
-import fouriertransform
+from RockstarLifestyle import MultiresHist
+From RockstarLifestyle import fouriertransform
 
 #Function 1: Test of Image Importing
 

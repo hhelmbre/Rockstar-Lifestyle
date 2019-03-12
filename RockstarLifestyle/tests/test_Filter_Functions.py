@@ -3,8 +3,8 @@ from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #code files that are within the tests
-import Filter_Functions
-import fouriertransform
+from RockstarLifestyle import Filter_Functions
+from RockstarLifestyle import fouriertransform
 
 #Function 1: Test of high pass filter function from filter_functions
 def test_high_pass_filter():
