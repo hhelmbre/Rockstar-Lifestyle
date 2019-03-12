@@ -28,8 +28,8 @@ def fourier_fshift(image):
 #Steps: plots the Magnitude Spectrum
 #Input: the magnitude spectrum Output
 #Output: none it just shows the image for funsies
-def Plot_M_Spec(m_spec):
-    plt.show(m_spec)
-    plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
-    plt.show()
-    return
+# def Plot_M_Spec(m_spec):
+#     plt.show(m_spec)
+#     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
+#     plt.show()
+#     return
