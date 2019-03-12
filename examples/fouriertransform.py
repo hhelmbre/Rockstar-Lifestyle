@@ -42,7 +42,7 @@ def Plot_M_Spec(m_spec):
 #Steps: split into components, used inputs with if tree to create shifts and magnitude for desired color
 #Input: desired color and image
 #Output: desired color fshift
-def color_split(image, desired_color):
+def color_split_fshift(image, desired_color):
     """splits the image into r or g or b color frequency then performs a fshift for that color"""
 #splits the image into the rbg componetnts
     image_color = Image.open('Test_Photo_fromMike.png')
@@ -70,3 +70,27 @@ def color_split(image, desired_color):
     else:
          print('that desired color is not available')
     return(fshift)
+
+#Function 5: Splits the image into rgb components and creates the correct image coloring for them
+#Steps: split into components, used inputs with if tree to create desired color image
+#Input: desired color and image
+#Output: desired color image
+def color_split_image(image, desired_color):
+    """splits the image into r or g or b color frequency then creates image with that color"""
+#splits the image into the rbg componetnts
+    image_color = Image.open('Test_Photo_fromMike.png')
+    r,g,b = image_color.split()
+#if tree split based on desired color
+    if desired_color == "b":
+    #names image for the desired color
+        color_image = b
+    elif desired_color == "g":
+    #creates shift for green
+        color_image = g
+    elif desire_color == "r":
+    #creates shfit for red
+        color_image = r
+    #encompasses the rest of the inputs that do not work
+    else:
+         print('that desired color is not available')
+    return(color_image)
