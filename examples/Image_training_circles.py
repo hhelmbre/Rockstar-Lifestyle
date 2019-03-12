@@ -6,6 +6,10 @@ from random import randint
 import Image_training_pixels
 import Image_training_circles
 
+#Function 1: Generates a inputed number of images with random white circles on a black background
+#Steps: set seed, create a loop through requested number of images creating the circles on the background
+#Inputs: requested number of images
+#Outputs: an array that has the images saved as numpy arrays
 def image_generator_circles(n):
 	"""Generates a number of images with random circles on a background"""
 	np.random.seed(125) #creates the ability for the randomness to be reproducible
@@ -29,7 +33,10 @@ def image_generator_circles(n):
 		imgarray.append(array) #adds a callable feature for arrays
 	return imgarray
 
-
+#Function 2: Counts the number of white pixels in the image and translate that to number of objects
+#Steps: calls the counting function defined in Image training pixels and then normalizes it to squares
+#Inputs: the image array produced in the image generatior and the index the arrays
+#Outputs: the number of black pixels and how many objects there are normalized
 def pixel_counter_single_image_circles(array, array_index):
 	"""Counts the number of pixels for individual circle images"""
 	black, obj = Image_training_pixels.pixel_counter_single_image(array, array_index)
@@ -37,6 +44,10 @@ def pixel_counter_single_image_circles(array, array_index):
 	print('object=' + str(obj_normalized) + ', black=' +str(black))
 	return black, obj_normalized
 
+#Function 3: Runs the previous pixel counter for all requested images
+#Steps: runs through a for loop of the number of images that were intially generated and runs the pixel counter for single images for each one.
+#Inputs: the image array generated in the image_generator_circles
+#Outputs: pixel count which contains the index, the numbers of objects normalized for each one, the number of black pixels and the total pixels.
 def pixel_counter_whole_array_circles(array):
 	"""Counts the number of pixels for the array of circle images"""
 	i = 0
