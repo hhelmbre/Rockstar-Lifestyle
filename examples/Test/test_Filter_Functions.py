@@ -34,7 +34,7 @@ def test_HPF_compare():
 #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input is the wrong form"
-    assert isinstance(image, Image.Image), "input is in the wrong form"
+    #assert isinstance(image, Image.Image), "input is in the wrong form"
     return
 
 #Function 3: Test of low pass filter function from filter_functions
