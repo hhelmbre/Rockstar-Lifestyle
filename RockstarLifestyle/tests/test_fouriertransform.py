@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 #import internal packages
 from RockstarLifestyle import fouriertransform
+from RockstarLifestyle import preprocessing
 
 
 #Function 1: Test of Magnitude_Spectrum function from fouriertransform
@@ -30,13 +31,16 @@ def test_fourier_fshift():
     assert isinstance(fshift, np.ndarray), "output is in the wrong form"
     return fshift
 
-#Function 3: Test of Plot_M_Spec
-def test_Plot_M_Spec():
-#inputs for functions
-    image = Image.open('Test_Photo_fromMike.png').convert('L')
-    m_spec = fouriertransform.Magnitude_Spectrum(image)
-#runs function
-    fouriertransform.Plot_M_Spec(m_spec)
-#asserts and checks
-    assert isinstance(image, Image.Image), "input is in the wrong form"
-    return
+# #Function 3: Test of Plot_M_Spec
+# def test_Plot_M_Spec():
+# #inputs for functions
+#     image = Image.open('Test_Photo_fromMike.png').convert('L')
+#     desired_color = 'g'
+#     image = preprocessing.color_split_image(image, desired_color)
+#     m_spec = fouriertransform.Magnitude_Spectrum(image)
+# #runs function
+#     fouriertransform.Plot_M_Spec(m_spec)
+# #asserts and checks
+#     assert isinstance(image, Image.Image), "input is in the wrong form"
+#     assert isinstance(m_spec, np.ndarray), "output is in the wrong form"
+#     return
