@@ -9,14 +9,14 @@ from RockstarLifestyle import preprocessing
 from RockstarLifestyle import fouriertransform
 
 #Function 1: Test of im_contrast
-def test_im_contrast():
+def test_image_contrast():
 #inputs for functions
     image = Image.open('Test_Photo_fromMike.png')
     contrast_value = 2
 #function performance
-    enhanced_im = preprocessing.im_contrast(image, contrast_value)
+    enhanced_image = preprocessing.image_contrast(image, contrast_value)
 #asserts and checks
-    return enhanced_im
+    return enhanced_image
 
 #Function 2: Test of color_split_fshift
 def test_color_split_fshift():
