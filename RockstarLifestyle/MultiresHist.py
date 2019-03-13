@@ -36,11 +36,13 @@ def gauss_filter(image, gauss_blur_list):
 #Function 4: Obtaining Histograms
 #need to have variable bins functionality as well
 def cumulative_hist(gauss_blur_images, bin_list):
-    hist = []
+    hist = [];
     for images in gauss_blur_images:
         for bin_count in bin_list:
-            fig = plt.figure()
-            hist_itt = plt.hist(images, bins=bin_count, density = True, cumulative = True)
+            fig = plt.figure();
+            hist_itt = plt.hist(images, bins=bin_count,
+                density = True, cumulative = True);
+            plt.close();
             hist.append(hist_itt)
     return hist
 
@@ -94,5 +96,6 @@ def Multi_res_hist_full(image, bin_list, gauss_blur_list):
     ax1.set_xlabel('Tonal Value')
     ax1.set_ylabel('Frequency')
     ax1.set_xticklabels([]),
+    ax1.set_title('Difference Histogram')
     fig2.tight_layout()
     return
