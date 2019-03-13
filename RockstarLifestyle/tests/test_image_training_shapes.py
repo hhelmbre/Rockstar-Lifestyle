@@ -146,3 +146,16 @@ def test_pixel_counter_whole_array_rectangles():
     assert isinstance(n, int), "input is the wrong form"
     assert isinstance(array, list), "input is in the wrong form"
     return pixel_count
+
+#Function 10: Test of image rectangle generator from Image_training_rectangles
+def test_image_generator_overlap():
+    """Test: Generates a number of images with random rectangles and circles 
+on a background"""
+#function Inputs
+    n = 2
+#function performance
+    imgarray = Image_training_overlap.image_generator_circles_and_rectangles(n)
+#checks and asserts
+    assert isinstance(n, int), "input is the wrong form"
+    assert isinstance(imgarray, list), "output is in the wrong form"
+    return imgarray
