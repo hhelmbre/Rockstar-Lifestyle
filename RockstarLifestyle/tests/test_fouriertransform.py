@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 #import internal packages
-from RockstarLifestyle import fouriertransform
-from RockstarLifestyle import preprocessing
+from RockstarLifestyle import fouriertransform, preprocessing
+
 
 
 #Function 1: Test of Magnitude_Spectrum function from fouriertransform
