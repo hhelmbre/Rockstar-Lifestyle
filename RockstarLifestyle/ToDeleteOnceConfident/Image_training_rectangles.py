@@ -1,4 +1,4 @@
-#Purpose - generates a series of images wiht random rectangles in order to be used for training purposes
+#Purpose - generates a series of images with random rectangles in order to be used for training purposes
 #import external packages
 import numpy as np
 import pandas as pd

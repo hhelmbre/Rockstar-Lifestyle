@@ -1,12 +1,10 @@
-#Purpose: create filters to go over images in an effort to extract infomation about them 
+#Purpose: create filters to go over images in an effort to extract infomation about them
 #import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #import internal packages
-from RockstarLifestyle import fouriertransform
-from RockstarLifestyle import Filter_Functions
-from RockstarLifestyle import preprocessing
+from RockstarLifestyle import fouriertransform, Filter_Functions, preprocessing
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied

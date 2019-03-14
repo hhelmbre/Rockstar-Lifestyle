@@ -1,13 +1,10 @@
+#import external packages
 import numpy as np
 import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
-
 #import function packages
-from RockstarLifestyle import Image_training_circles
-from RockstarLifestyle import Image_training_pixels
-from RockstarLifestyle import Image_training_rectangles
-from RockstarLifestyle import Image_training_overlap
+from RockstarLifestyle import training_images
 
 # From Image Training Circles Function Folders:
 
