@@ -58,7 +58,7 @@ def pixel_counter_single_image(array, array_index):
 #Inputs: the image array generated in the image_generator_rectangles
 #Outputs: pixel count which contains the index, the numbers of objects normalized for each one, the number of black pixels and the total pixels.
 def pixel_counter_whole_array(array):
-    """Counts the number of pixels for """
+    """Counts the number of pixels for the whole array"""
     i = 0
     pixel_count = pd.DataFrame(columns=['Index','Object', 'Black', 'Total']) #Creates dataframefor storing count data
     for i in range(0,len(array)): #counts through the 'images' in the given array
