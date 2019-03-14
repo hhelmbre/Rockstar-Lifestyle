@@ -12,17 +12,19 @@ whole-cell staining. Referring to the ....... poster will provide a more
 specific overview of the project. 
 
 ### How to Install
-```
-pip install .
-```
+
+1. Use `git clone` to clone repository
+2. Use ` pip install .` to install and run functions
+  
 ### Software Dependencies
 - Python3
 - For python packages see requirements.txt
 
+
 ## Organization of the project
 ```
-RockstarLifestyle/
-	tests/
+**RockstarLifestyle/**
+	**tests/**
 		Test_Photo_fromMike.png
 		_init.py
 		test_Filter_Functions.py
@@ -38,16 +40,15 @@ RockstarLifestyle/
 	MultiresHist.py
 	ObjectStats.py
 	Test_Photo_fromMike.py
-```
 	_init_.py
 	fouriertransform.py
 	imcrop.py
 	preprocessing.py
-Images/
+**Images/**
 	P10_LPS_ipsi_40x_hippo_scan_MaxIP.png
 	P14_healthy_40x_hippo_scan_MaxIP.png
 	P35_LPS_ipsi_40x_hippo_scan_MaxIP.png
-examples/
+**examples/**
 	EdgeStatistics.ipynb
 	Functionalized-Multires-histograms.ipynb
 	Image_Unit_Tests.ipynb
@@ -84,3 +85,9 @@ David Shackelford - dash2927
 MIT Licence Copyright (c) 2019 hhelmbre
 ```
 ## Acknowledgements
+We would like to thank Professor David Beck and the fantastic group of 
+teaching assistants in the DIRECT program, especially Chad Curtis, for all 
+of their help and guidance with the development of this project.
+
+We would also like to thank the Nance Lab and the University of Washington 
+for providing the testing images.  

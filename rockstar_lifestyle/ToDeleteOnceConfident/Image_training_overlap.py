@@ -6,7 +6,6 @@ from PIL import Image, ImageDraw
 from random import randint
 #from function files
 from RockstarLifestyle import Image_training_circles
-from RocstarLifestyle import Image_training_circles_and _rectangles
 
 #Function 1: Generates a inputed number of images with random white circles and white rectangles on a black background.
 #Steps: set seed, create a loop through requested number of images creating the cirles and rectangles, append array with np versions of the images.
@@ -41,5 +40,4 @@ def image_generator_circles_and_rectangles(n):
                 draw.rectangle([e,f,g,h], fill=255)
         array = np.array(img) #saves the image as a numpy array
         imgarray.append(array) #adds a callable feature for arrays
-
     return imgarray
