@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
+import matplotlib.cbook as cbook
 #import internal packages
 from RockstarLifestyle import MultiresHist
 from RockstarLifestyle import preprocessing
@@ -35,16 +36,61 @@ def gauss_filter(image, gauss_blur_list):
 
 #Function 4: Obtaining Histograms
 #need to have variable bins functionality as well
-def cumulative_hist(gauss_blur_images, bin_list):
+def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
     hist = [];
     for images in gauss_blur_images:
         for bin_count in bin_list:
-            fig = plt.figure();
-            hist_itt = plt.hist(images, bins=bin_count,
-                density = True, cumulative = True);
-            plt.close();
+            if show_figs:
+                fig = plt.figure()
+                hist_itt = plt.hist(images, bins = bin_count,
+                                   density = True, cumulative = True)
+            else:
+                hist_itt = nofig_cumulative_hist(images, bins = bin_count)
             hist.append(hist_itt)
     return hist
+
+def nofig_cumulative_hist(
+                      x,
+                      bins):
+    """
+    The following function is based off the hist() class-based function within the
+    _axes.py file of matplotlib located in:
+    ...\matplotlib-base-3.0.3-py37h3e3dc42_0\Lib\site-packages\matplotlib\axes\_axes.py
+    The current hist() method in matplotlib outputs figures along with data. The
+    problem with this is that figures take computation time to execute and iterating
+    this method over multiple datasets can cause crashing. At the same time,
+    downstream functions require input data in a similar format as matplotlib
+    function output. To resolve this, we use the hist() class function used in
+    matplotlib and suppress the section of code that draws out the graphs and
+    only output an array of the height-data and corresponding bins.
+    Parameters
+    ----------
+    x : np.uint16 : List of datapoints to process
+    bins : np.uint16 : String of bins to use in np.histogram()
+    Return
+    ------
+    tops : np.array(dtype=float) : histogram heights
+    bins : list : list of bin edges
+    """
+    tops = []
+    x = cbook._reshape_2D(x, 'x')
+    nx = len(x)
+    xmin = np.inf
+    xmax = -np.inf
+    for xi in x:
+        if len(xi) > 0:
+            xmin = min(xmin, np.nanmin(xi))
+            xmax = max(xmax, np.nanmax(xi))
+    bin_range = (xmin, xmax)
+
+    for i in range(nx):
+        m, bins = np.histogram(x[i], bins, bin_range, density = True)
+        m = m.astype(float)
+        tops.append(m)
+    slc = slice(None)
+    tops = [(m * np.diff(bins))[slc].cumsum()[slc] for m in tops]
+    return tops, bins
+
 
 #Function 5: Determines plot 1 and 2 from initial image, blur list, and bin list
 #Steps: load all input, run the cumulative_hist function and split the function into one and two
@@ -82,7 +128,7 @@ def diff_hist(hist1_plot, hist2_plot):
 
 #Function 8: Function that puts it all together and outputs the concatenated histograms
 
-def Multi_res_hist_full(image, bin_list, gauss_blur_list):
+def Multi_res_hist_full(image, bin_list, gauss_blur_list, show_figs = True):
     arr = np.array(image)
     gauss_blur_images = gauss_filter(image, gauss_blur_list)
     cumulative_Histograms = cumulative_hist(gauss_blur_images, bin_list)
