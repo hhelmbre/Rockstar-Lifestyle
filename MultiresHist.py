@@ -8,10 +8,8 @@ from matplotlib import pyplot as plt
 import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
+import MultiresHist as mult
 import matplotlib.cbook as cbook
-#import internal packages
-from RockstarLifestyle import MultiresHist
-from RockstarLifestyle import preprocessing
 
 
 #Function 1: Importing images
@@ -48,15 +46,15 @@ def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
         for bin_count in bin_list:
             if show_figs:
                 fig = plt.figure()
-                hist_itt = plt.hist(images, bins = bin_count,
-                                   density = True, cumulative = True)
+                hist_itt = plt.hist(images, bins = bin_count, density = True, cumulative = True)
             else:
                 hist_itt = nofig_cumulative_hist(images, bins = bin_count)
             hist.append(hist_itt)
     return hist
 
 def nofig_cumulative_hist(
-                      x, bins):
+                      x,
+                      bins):
     """
     The following function is based off the hist() class-based function within the
     _axes.py file of matplotlib located in:
@@ -89,6 +87,7 @@ def nofig_cumulative_hist(
             xmin = min(xmin, np.nanmin(xi))
             xmax = max(xmax, np.nanmax(xi))
     bin_range = (xmin, xmax)
+
     for i in range(nx):
         m, bins = np.histogram(x[i], bins, bin_range, density = True)
         m = m.astype(float)
@@ -97,19 +96,9 @@ def nofig_cumulative_hist(
     tops = [(m * np.diff(bins))[slc].cumsum()[slc] for m in tops]
     return tops, bins
 
-
-
-#Function 5: Determines plot 1 and 2 from initial image, blur list, and bin list
-#Steps: load all input, run the cumulative_hist function and split the function into one and two
-#Inputs: intial image, blur list and bin list
-#Outputs: histogram plot one and two
-def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
-    image = preprocessing.color_split_image(image, desired_color)
-    gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
-    hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
-    hist1_plot = hist[0]
-    hist2_plot = hist[1]
-    return hist1_plot, hist2_plot
+#Funciton x: For determining plot 1 and plot 2
+def diff_plot_determination(hist):
+    pass
 
 #Function 6: Obtaining difference histograms between two cumulative histograms
 
