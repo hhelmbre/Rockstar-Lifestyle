@@ -8,16 +8,9 @@ from matplotlib import pyplot as plt
 import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
-<<<<<<< HEAD
-import matplotlib.cbook as cbook
-#import internal packages
-from RockstarLifestyle import MultiresHist
-from RockstarLifestyle import preprocessing
-=======
 import MultiresHist as mult
 import matplotlib.cbook as cbook
 
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
 
 #Function 1: Importing images
 def image_import():
@@ -46,24 +39,14 @@ def gauss_filter(image, gauss_blur_list):
 
 #Function 5: Obtaining Histograms
 #need to have variable bins functionality as well
-<<<<<<< HEAD
-def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
-    hist = [];
-=======
 
 def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
     hist = []
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
     for images in gauss_blur_images:
         for bin_count in bin_list:
             if show_figs:
                 fig = plt.figure()
-<<<<<<< HEAD
-                hist_itt = plt.hist(images, bins = bin_count,
-                                   density = True, cumulative = True)
-=======
                 hist_itt = plt.hist(images, bins = bin_count, density = True, cumulative = True)
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
             else:
                 hist_itt = nofig_cumulative_hist(images, bins = bin_count)
             hist.append(hist_itt)
@@ -83,18 +66,12 @@ def nofig_cumulative_hist(
     function output. To resolve this, we use the hist() class function used in
     matplotlib and suppress the section of code that draws out the graphs and
     only output an array of the height-data and corresponding bins.
-<<<<<<< HEAD
-=======
 
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
     Parameters
     ----------
     x : np.uint16 : List of datapoints to process
     bins : np.uint16 : String of bins to use in np.histogram()
-<<<<<<< HEAD
-=======
 
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
     Return
     ------
     tops : np.array(dtype=float) : histogram heights
@@ -119,24 +96,9 @@ def nofig_cumulative_hist(
     tops = [(m * np.diff(bins))[slc].cumsum()[slc] for m in tops]
     return tops, bins
 
-<<<<<<< HEAD
-
-#Function 5: Determines plot 1 and 2 from initial image, blur list, and bin list
-#Steps: load all input, run the cumulative_hist function and split the function into one and two
-#Inputs: intial image, blur list and bin list
-#Outputs: histogram plot one and two
-def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
-    image = preprocessing.color_split_image(image, desired_color)
-    gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
-    hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
-    hist1_plot = hist[0]
-    hist2_plot = hist[1]
-    return hist1_plot, hist2_plot
-=======
 #Funciton x: For determining plot 1 and plot 2
 def diff_plot_determination(hist):
     pass
->>>>>>> 267efabe611b11c47ca6f64acd0563058b04762a
 
 #Function 6: Obtaining difference histograms between two cumulative histograms
 
