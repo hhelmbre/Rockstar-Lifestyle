@@ -7,8 +7,8 @@ import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
-from RockstarLifestyle import MultiresHist
-from RockstarLifestyle import preprocessing
+from RockstarLifestyle import MultiresHist, preprocessing
+
 
 #Function 1: Test of Image Importing
 
