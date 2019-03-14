@@ -1,4 +1,4 @@
-#Purpose: create filters to go over images in an effort to extract infomation about them
+#Purpose: create filters to go over images in an effort to extract infomation about them 
 #import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
