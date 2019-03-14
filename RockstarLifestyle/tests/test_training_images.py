@@ -14,7 +14,7 @@ def test_image_generator_circles():
 #function Inputs
 	n = 2
 #function performance
-	imgarray = Image_training_circles.image_generator_circles(n)
+	imgarray = training_images.image_generator_circles(n)
 #checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(imgarray, list), "output is in the wrong form"
@@ -25,7 +25,7 @@ def test_pixel_counter_single_image_circles():
 	"""Test: Counts the number of pixels for individual circle images"""
 #function Inputs
 	n = 2
-	array = Image_training_circles.image_generator_circles(n)
+	array = training_images.image_generator_circles(n)
 	array_index = 1
 #function performance
 	black, obj_normalized = Image_training_circles.pixel_counter_single_image_circles(array, array_index)
@@ -43,7 +43,7 @@ def test_pixel_counter_whole_array_circles():
 	"""Test: Counts the number of pixels for the array of circle images"""
 #function Inputs
 	n = 2
-	array = Image_training_circles.image_generator_circles(n)
+	array = training_images.image_generator_circles(n)
 #function performance
 	pixel_count = Image_training_circles.pixel_counter_whole_array_circles(array)
 #checks and asserts
@@ -63,7 +63,7 @@ background"""
 	#function Inputs
 	n = 2
 	#function performance
-	imgarray = Image_training_pixels.random_image_generator(n)
+	imgarray = training_images.random_image_generator(n)
 	#checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(imgarray, list), "output is in the wrong form"
@@ -74,7 +74,7 @@ def test_pixel_counter_single_image():
 	"""Counts the number of colored pixels for a single image"""
 	#function Inputs
 	n = 2
-	array = Image_training_pixels.random_image_generator(n)
+	array = training_images.random_image_generator(n)
 	array_index = 1
 	#function performance
 	black, obj = Image_training_pixels.pixel_counter_single_image(array, array_index)
@@ -91,9 +91,9 @@ def test_pixel_counter_whole_array():
 	"""Test: Counts the number of colored pixels for a single image"""
 #function Inputs
 	n = 2
-	array = Image_training_pixels.random_image_generator(n)
+	array = training_images.random_image_generator(n)
 #function performance
-	pixel_count = Image_training_pixels.pixel_counter_whole_array(array)
+	pixel_count = training_images.pixel_counter_whole_array(array)
 #checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(array, list), "input is in the wrong form"
@@ -109,7 +109,7 @@ def test_image_generator_rectangles():
 #function Inputs
 	n = 2
 #function performance
-	imgarray = Image_training_rectangles.image_generator_rectangles(n)
+	imgarray = training_images.image_generator_rectangles(n)
 #checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(imgarray, list), "output is in the wrong form"
@@ -120,10 +120,10 @@ def test_pixel_counter_single_image_rectangles():
 	"""Test: Counts the number of pixels for individual rectangle images"""
 	#function Inputs
 	n = 2
-	array = Image_training_rectangles.image_generator_rectangles(n)
+	array = training_images.image_generator_rectangles(n)
 	array_index = 1
 	#function performance
-	black, obj_normalized = Image_training_rectangles.pixel_counter_single_image_rectangles(array, array_index)
+	black, obj_normalized = training_images.pixel_counter_single_image_rectangles(array, array_index)
 	#checks and asserts
 	assert isinstance(array_index, int), "Input is in the wrong form"
 	assert isinstance(array, list), "Input is the wrong form"
@@ -137,9 +137,9 @@ def test_pixel_counter_whole_array_rectangles():
 	"""Test: Counts the number of pixels for the array of rectangle images"""
 	#function Inputs
 	n = 2
-	array = Image_training_rectangles.image_generator_rectangles(n)
+	array = training_images.image_generator_rectangles(n)
 	#function performance
-	pixel_count =Image_training_rectangles.pixel_counter_whole_array_rectangles(array)
+	pixel_count = training_imagess.pixel_counter_whole_array_rectangles(array)
 	#checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(array, list), "input is in the wrong form"
@@ -152,7 +152,7 @@ on a background"""
 #function Inputs
 	n = 2
 #function performance
-	imgarray = Image_training_overlap.image_generator_circles_and_rectangles(n)
+	imgarray = training_images.image_generator_circles_and_rectangles(n)
 #checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(imgarray, list), "output is in the wrong form"

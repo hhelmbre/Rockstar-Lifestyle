@@ -10,8 +10,7 @@ from scipy.ndimage import gaussian_filter
 import timeit
 import matplotlib.cbook as cbook
 #import internal packages
-from RockstarLifestyle import MultiresHist
-from RockstarLifestyle import preprocessing
+from RockstarLifestyle import multiresolution, preprocessing
 
 
 #Function 1: Importing images
