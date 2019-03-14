@@ -1,3 +1,9 @@
+# SET UP FILE:
+# in order to run in notebooks as an import RockstarLifestyle
+# 1. go to the outermost Rockstar_Lifestyle folder
+# 2. use "pip install . "
+# 3. import into a notebook using "from RockstarLifestyle import xxxxxx"
+
 from setuptools import setup
 
 setup(name = 'Rockstar_Lifestyle',
