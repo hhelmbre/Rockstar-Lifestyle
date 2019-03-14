@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import scipy
 #import internal packages
-from RockstarLifestyle import preprocessing, fouriertransform
+from rockstar_lifestyle import preprocessing, fouriertransform
 
 
 #Function 1: Test of image_contrast from preprocessing

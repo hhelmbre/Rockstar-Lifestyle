@@ -3,9 +3,8 @@ from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #code files that are within the tests
-from RockstarLifestyle import Filter_Functions
-from RockstarLifestyle import fouriertransform
-from RockstarLifestyle import preprocessing
+from rockstar_lifestyle import edges, fouriertransform, preprocessing
+
 
 #Function 1: Test of high pass filter function from filter_functions
 def test_high_pass_filter():
@@ -15,7 +14,7 @@ def test_high_pass_filter():
     radius = 80
     desired_color = "b"
 #function performance
-    hpf_image = Filter_Functions.high_pass_filter(image, radius, desired_color) #runs the Function
+    hpf_image = edges.high_pass_filter(image, radius, desired_color) #runs the Function
 #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input is the wrong form"
@@ -31,7 +30,7 @@ def test_HPF_compare():
     radius = 80
     desired_color = "b"
 #function performance
-    Filter_Functions.HPF_compare(image, radius, desired_color)
+    edges.HPF_compare(image, radius, desired_color)
 #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input is the wrong form"
@@ -46,7 +45,7 @@ def test_low_pass_filter():
     radius = 80
     desired_color = "b"
 #function performance
-    lpf_image = Filter_Functions.low_pass_filter(image, radius, desired_color)
+    lpf_image = edges.low_pass_filter(image, radius, desired_color)
 #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input needs to be a string called r or g or b"
@@ -62,7 +61,7 @@ def test_LPF_compare():
     radius = 80
     desired_color = "b"
 #run function
-    Filter_Functions.low_pass_filter(image, radius, desired_color)
+    edges.low_pass_filter(image, radius, desired_color)
 #asserts and checks
     assert isinstance(image, Image.Image), "input is in the wrong form"
     return
@@ -76,7 +75,7 @@ def test_band_pass_filter():
     radiusout = 100
     desired_color = "b"
 #function performance
-    bpf_image = Filter_Functions.band_pass_filter(image, radiusin, radiusout, desired_color)
+    bpf_image = edges.band_pass_filter(image, radiusin, radiusout, desired_color)
 #function asserts and checks
     assert isinstance(radiusin, int), "input is the wrong form"
     assert isinstance(radiusout, int), "input is the wrong form"
@@ -94,7 +93,7 @@ def test_BPF_compare():
     radiusout = 100
     desired_color = "b"
 #function performance
-    Filter_Functions.BPF_compare(image, radiusin, radiusout, desired_color)
+    edges.BPF_compare(image, radiusin, radiusout, desired_color)
 #asserts and checks
     assert isinstance(image, Image.Image), "input is in the wrong form"
     return

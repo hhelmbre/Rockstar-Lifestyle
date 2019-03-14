@@ -4,7 +4,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #import function packages
-from RockstarLifestyle import training_images
+from rockstar_lifestyle import training_images
 
 # From Image Training Circles Function Folders:
 
@@ -28,7 +28,7 @@ def test_pixel_counter_single_image_circles():
 	array = training_images.image_generator_circles(n)
 	array_index = 1
 #function performance
-	black, obj_normalized = Image_training_circles.pixel_counter_single_image_circles(array, array_index)
+	black, obj_normalized = training_images.pixel_counter_single_image_circles(array, array_index)
 #checks and asserts
 	assert isinstance(array_index, int), "Input is in the wrong form"
 	assert isinstance(array, list), "Input is the wrong form"
@@ -45,7 +45,7 @@ def test_pixel_counter_whole_array_circles():
 	n = 2
 	array = training_images.image_generator_circles(n)
 #function performance
-	pixel_count = Image_training_circles.pixel_counter_whole_array_circles(array)
+	pixel_count = training_images.pixel_counter_whole_array_circles(array)
 #checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(array, list), "input is in the wrong form"
@@ -77,7 +77,7 @@ def test_pixel_counter_single_image():
 	array = training_images.random_image_generator(n)
 	array_index = 1
 	#function performance
-	black, obj = Image_training_pixels.pixel_counter_single_image(array, array_index)
+	black, obj = training_images.pixel_counter_single_image(array, array_index)
 	#checks and asserts
 	assert isinstance(array_index, int), "Input is in the wrong form"
 	assert isinstance(array, list), "Input is the wrong form"
@@ -139,7 +139,7 @@ def test_pixel_counter_whole_array_rectangles():
 	n = 2
 	array = training_images.image_generator_rectangles(n)
 	#function performance
-	pixel_count = training_imagess.pixel_counter_whole_array_rectangles(array)
+	pixel_count = training_images.pixel_counter_whole_array_rectangles(array)
 	#checks and asserts
 	assert isinstance(n, int), "input is the wrong form"
 	assert isinstance(array, list), "input is in the wrong form"
