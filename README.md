@@ -12,11 +12,10 @@ whole-cell staining. Referring to the ....... poster will provide a more
 specific overview of the project. 
 
 ### How to Install
-```
+
 1. Use `git clone` to clone repository
-2. Import packages from the repository
-3. Use ` pip install .` to install and run functions
-```  
+2. Use ` pip install .` to install and run functions
+  
 ### Software Dependencies
 - Python3
 - For python packages see requirements.txt
