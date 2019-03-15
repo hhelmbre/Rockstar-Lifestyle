@@ -4,7 +4,7 @@ from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #import internal packages
-from RockstarLifestyle import fouriertransform, filter_functions, preprocessing
+from rockstar_lifestyle import fouriertransform, edges, preprocessing
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps:fourier transform,
@@ -52,7 +52,7 @@ def high_pass_filter(image, radius, desired_color):
 #Output: none it just shows the image for funsies
 def HPF_compare(image, radius, desired_color):
     """Plots the image and the high pass filter image for comparison"""
-    hpf_image = Filter_Functions.high_pass_filter(image, radius, desired_color)
+    hpf_image = edges.high_pass_filter(image, radius, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (15,15))
 #plot input image
@@ -108,9 +108,9 @@ def low_pass_filter(image, radius, desired_color):
 #Steps: plots the input image, plot low pass filter image
 #Input: input image and desired radius for filter mask
 #Output: none it just shows the image for funsies
-def LPF_compare(image, radius):
+def LPF_compare(image, radius, desired_color):
     """Plots the image and the low pass filter image for comparison"""
-    lpf_image = Filter_Functions.low_pass_filter(image, radius, desired_color)
+    lpf_image = edges.low_pass_filter(image, radius, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (15,15))
 #plot input image
@@ -170,7 +170,7 @@ def band_pass_filter(image, radiusin, radiusout, desired_color):
 def BPF_compare(image, radiusin, radiusout, desired_color):
     """plots the band pass filter versus the input image"""
 #gets the bpf image
-    bpf_image = Filter_Functions.band_pass_filter(image, radiusin, radiusout, desired_color)
+    bpf_image = edges.band_pass_filter(image, radiusin, radiusout, desired_color)
 #create subplot
     fig, axs = plt.subplots(1,2, figsize = (30,30))
 #plot input image
