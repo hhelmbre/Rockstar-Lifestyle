@@ -10,7 +10,7 @@ import tifffile
 
 import warnings
 
-import MultiresHist as mH
+from rockstar_lifestyle import MultiresHist as mH
 
 #
 # Made by: Rockstar-Lifestyle | UW DIRECT | 2019
