@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw
 from random import randint
 
 #import function packages
-from RockstarLifestyle import training_images
+from rockstar_lifestyle import training_images
 
 # From Image Training Circles Function Folders:
 
