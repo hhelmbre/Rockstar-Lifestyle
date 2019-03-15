@@ -9,17 +9,17 @@ from PIL import Image, ImageFilter, ImageEnhance
 #Inputs: image
 #Outputs: magntidue spectrum array
 def Magnitude_Spectrum(image):
-    """peforms the fourier transform and returns the fshift which is used within filter functions"""
+"""Peforms a fourier transform and returns the m_spec"""
     fshift = fourier_fshift(image)
     m_spec= np.log(np.abs(fshift))
     return m_spec
 
-#Function 2: Performs the fourier transform with steps to get fshift - used within filter functions
+#Function 2: Performs the fourier transform with steps to get fshift- used within filter functions
 #Steps: fourier transform, fourier shift, gets the magnitude Spectrum
 #Inputs: image
 #Outputs: fshift
 def fourier_fshift(image):
-    """peforms the fourier transform and returns the fshift which is used within filter functions"""
+"""peforms the fourier transform and returns the fshift"""
     f = np.fft.fft2(image)
     fshift= np.fft.fftshift(f)
     return fshift

@@ -5,10 +5,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 import scipy
 #import internal packages
-from RockstarLifestyle import preprocessing
-from RockstarLifestyle import fouriertransform
+from rockstar_lifestyle import preprocessing, fouriertransform
 
-#Function 1: Test of im_contrast from preprocessing
+
+#Function 1: Test of image_contrast from preprocessing
 def test_image_contrast():
     """Test: increases the contrast in order to make possible fourier transforms smoother"""
 #inputs for functions

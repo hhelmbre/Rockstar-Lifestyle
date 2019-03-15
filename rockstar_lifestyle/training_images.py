@@ -2,31 +2,43 @@ import numpy as np
 import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
+#from function files
+from RockstarLifestyle import training_images
 
-#Function 1: Generates number of images with random pixels
+
+#Function 1: Generates images with random pixels
+#Steps: set seed, loops through images, and creates random white pixels
+#Inputs: number of images
 #Outputs: an array that has the images saved as numpy arrays
 
 def rand_im_gen(n):
-    """Generates images of randomized white pixels on black background"""
+    """Generates images of random white pixels on black background"""
     i=0
     j=0
     k=0
-    imgarray = [] #sets up the output array
-    for i in range(0, n): #begins counter on number of images as per input
-        img = Image.new('L', [250, 250]) #creates a 250x250 pixel image
+    #sets up the output array
+    imgarray = []
+    #loops through images and pixel placement values
+    for i in range(0, n):
+	#creates a 250x250 pixel image
+        img = Image.new('L', [250, 250])
         draw = ImageDraw.Draw(img)
-        np.random.seed(123+i) #creates reproducibility
-        for j in range(0,img.size[0]): #Creates random pixel placement
-            for k in range(0, img.size[0]):
+	#creates reproducibility
+        np.random.seed(123+i)
+        for j in range(0,img.size[0]):
+           for k in range(0, img.size[0]):
                 a = randint(0,50)+(3*j)
                 b = randint(0,50)+(3*k)
                 c = a+1
                 d = b+1
                 draw.ellipse([a,b,c,d], fill=255)
-                k=k+randint(90,100) #creates random jumps in the counter
+	#creates random jumps in the counter
+                k=k+randint(90,100)
             j = j+randint(90,100)
-        array = np.array(img) #saves the image as a numpy array
-        imgarray.append(array) #adds new array to the list of arrays
+	#saves the image as a numpy array
+        array = np.array(img)
+	#adds new array to the list of arrays
+        imgarray.append(array)
     return imgarray
 
 #Function 2: Counts and records the number of white pixels in the image
@@ -51,19 +63,20 @@ def pix_count_im(array, array_index):
 #Function 3: Runs the previous pixel counter for all requested images
 #Steps: Loops through images and runs the pix_count_im
 #Inputs: the image array generated in the image_generator_rectangles
-#Outputs: dataframe containing index, circles, black pixels, and total.
+#Outputs: dataframe containing index, circles, black pixels, and total
 
 def pix_count_array(array):
-    """Counts the number of pixels in array"""
+    """Counts the number of pixels in each image of the array"""
     i = 0
     pixel_count = pd.DataFrame(columns=['Index','Object', 
                                         'Black', 'Total'])
     for i in range(0,len(array)): #counts through the 'images' in given array
         array_index = i
-        black, obj = pix_count_im(array, array_index)
-        total = black + obj #sums up the number of pixels counted. Image are 250x250 so total should be 62500
+        black, obj = training_images.pix_count_im(array, array_index)
+        total = black + obj #sums up the pixels counted; should be 62500
         pixel_count.loc[i] = [i, obj, black, total]
     return pixel_count
+
 
 #Function 4: Generates images with random circles on a black background
 #Steps: set seed, loop through images creating the circles on background
@@ -92,13 +105,14 @@ def im_gen_circles(n):
 		imgarray.append(array) #adds a callable feature for array
 	return imgarray
 
+
 #Function 5: Counts white pixels and translates that to circle count
 #Steps: calls pix_count_im and normalizes it to circles
 #Inputs: the image array from im_gen_circles and the index 
 #Outputs: the number of black pixels and number of circles
 def pix_count_im_circles(array, array_index):
 	"""Counts the number of pixels for individual circle images"""
-	black, obj = pix_count_im(array, array_index)
+	black, obj = training_images.pix_count_im(array, array_index)
 	obj_normalized = obj/(69) #each full circle has 69 pixels in it.
 	print('object=' + str(obj_normalized) + ', black=' +str(black))
 	return black, obj_normalized
@@ -114,7 +128,7 @@ def pix_count_array_circles(array):
                                             'Black','Total']) #dataframe
 	for i in range(0,len(array)): #loops through the images in array
 		array_index = i
-		black, obj_normalized = pix_count_im_circles(
+		black, obj_normalized = training_images.pix_count_im_circles(
                         array, array_index)
 		total = black + obj_normalized*69 #62500 pixel totals
 		pixel_count.loc[i] = [i, obj_normalized, black, total] 
@@ -149,13 +163,14 @@ def im_gen_rect(n):
 		imgarray.append(array) #adds a callable feature for arrays
 	return imgarray
 
+
 #Function 8: Counts number of rectangles in image
 #Steps: calls pix_count_im and normalizes it to squares
 #Inputs: the image array from im_gen_rect and the index the arrays
 #Outputs: the number of black pixels and number of rectangles
 def pix_count_im_rect(array, array_index):
 	"""Counts the number of pixels for individual rectangle images"""
-	black, obj = pix_count_im(array, array_index)
+	black, obj = training_images.pix_count_im(array, array_index)
 	obj_normalized = obj/(25) #normalizes to the of pixels per square
 	print('object=' + str(obj_normalized) + ', black=' +str(black))
 	return black, obj_normalized
@@ -172,12 +187,13 @@ def pixel_counter_whole_array_rectangles(array):
 	pixel_count = pd.DataFrame(columns=['Index','Object',
                                             'Black','Total']) #Dataframe
 	for i in range(0,len(array)): #loops through the images per array
-		black, obj = pix_count_im_rect(array, array_index)
+		black, obj = training_images.pix_count_im_rect(array, array_index)
 		array_index = i
 		obj_normalized = obj/(25) #pixels per rectangle
 		total = black + obj #62500 pixels should be counted
 		pixel_count.loc[i] = [i, obj_normalized, black, total] 
         return pixel_count
+
 
 #Function 10: Generates images with random white circles and rectangles.
 #Steps: set seed, loops through images creating cirles and rectangles.

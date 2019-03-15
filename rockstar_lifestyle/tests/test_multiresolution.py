@@ -7,8 +7,8 @@ import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
-from RockstarLifestyle import MultiresHist
-from RockstarLifestyle import preprocessing
+from rockstar_lifestyle import multiresolution, preprocessing
+
 
 #Function 1: Test of Image Importing
 
@@ -22,7 +22,7 @@ def test_gauss_filter():
     image = preprocessing.color_split_image(image, desired_color)
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
 #function running
-    gauss_blurs = MultiresHist.gauss_filter(image, gauss_blur_list)
+    gauss_blurs = multiresolution.gauss_filter(image, gauss_blur_list)
 #asserts and checks
     assert isinstance(desired_color, str), "intial input is wrong"
     assert isinstance(gauss_blur_list, list), "input is wrong"
@@ -35,10 +35,10 @@ def test_cumulative_hist():
     desired_color = 'g'
     image = preprocessing.color_split_image(image, desired_color)
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
-    gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
+    gauss_blur_images = multiresolution.gauss_filter(image, gauss_blur_list)
     bin_list = [3] #number of bins desired for histogram
 #function running
-    hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
+    hist = multiresolution.cumulative_hist(gauss_blur_images, bin_list)
 #asserts and checks
 
     return hist
@@ -51,7 +51,8 @@ def test_diff_plot_determination():
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
     bin_list = [3] #number of bins desired for histogram
 #running the functions
-    hist1_plot, hist2_plot = MultiresHist.diff_plot_determination(image, desired_color, gauss_blur_list, bin_list)
+    hist1_plot, hist2_plot = multiresolution.diff_plot_determination(
+        image, desired_color, gauss_blur_list, bin_list)
 #asserts and checks
     return hist1_plot, hist2_plot
 
@@ -63,9 +64,10 @@ def test_diff_hist():
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
     bin_list = [3] #number of bins desired for histogram
 # getting the two plots needed to run difference
-    hist1_plot, hist2_plot = MultiresHist.diff_plot_determination(image, desired_color, gauss_blur_list, bin_list)
+    hist1_plot, hist2_plot = multiresolution.diff_plot_determination(
+        image, desired_color, gauss_blur_list, bin_list)
 #function running
-    heights = MultiresHist.diff_hist(hist1_plot, hist2_plot)
+    heights = multiresolution.diff_hist(hist1_plot, hist2_plot)
 # asserts and checks
     return heights
 

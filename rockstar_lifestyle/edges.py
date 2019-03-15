@@ -1,22 +1,21 @@
-#Purpose: create filters to go over images in an effort to extract infomation about them 
+#Purpose: create filters to go over images in an effort to extract infomation about them
 #import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #import internal packages
-from RockstarLifestyle import fouriertransform
-from RockstarLifestyle import Filter_Functions
-from RockstarLifestyle import preprocessing
+from RockstarLifestyle import fouriertransform, filter_functions, preprocessing
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
-#Steps: fourier transform, creation of mask (define size, all ones, create zero circle, combine two), apply mask, shift back to image with mask applied
+#Steps:fourier transform,
+      #creation of mask (define size, all ones, create zero circle, combine two),
+      #apply mask, shift back to image with mask applied
 #Inputs: image and desired radius (used to change the starkness of the lines)
 #Outputs: image that has been filtered
 def high_pass_filter(image, radius, desired_color):
-    """takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
+    """Creates an image that has a high pass filter applied"""
 #forier transform the image and return fshift
     fshift = preprocessing.color_split_fshift(image, desired_color)
-
 #building an array that covers the entire image as a mask
 #determines the pixels in the rows and columns
     row, column = image.size
@@ -24,15 +23,16 @@ def high_pass_filter(image, radius, desired_color):
     center_row = int(row/2)
     center_column = int(column/2)
     center = [center_row, center_column]
-#for a HPF all other remaining values are one so we need to bulid an orginal array of all one in the size of the photograph
+#For a HPF all outside values are 1 so we need to build an array of all 1's the size of the photograph
     ones_mask = np.ones((row, column))
-#radius of the circle that is blocked out - can be changed to refine edges
+#Radius of the circle that is blocked out - can be changed to refine edges.
     r=radius
-#in order to create the circle of zeros we need to index an array of the same size as the image
+#In order to create the circle of zeros we need to index an array of the same size as the image
     x, y = np.ogrid[:row,:column]
-#equation of circle is x^2 + y^2 = r^2 - need to have a circle of zeros at the center of the image the less than fills the circle in to the origion
+#Equation of circle is x^2 + y^2 = r^2.
+#Builds a circle of zeros at the center of the image
     zero_circle = (x - center_row) ** 2 + (y - center_column) ** 2 <= r*r
-#now the last step to create the mask is the overlay the zero_circle on the ones mask
+#Overlays the zero_circle on the ones mask
     ones_mask[zero_circle] = 0
 
 #we still need to apply the mask to the fourier transform
