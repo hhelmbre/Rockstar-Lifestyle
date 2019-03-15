@@ -54,7 +54,7 @@ def HPF_compare(image, radius, desired_color):
     """Plots the image and the high pass filter image for comparison"""
     hpf_image = edges.high_pass_filter(image, radius, desired_color)
 #create subplot
-    fig, axs = plt.subplots(1,2, figsize = (15,15))
+    fig, axs = plt.subplots(1,2, figsize = (30,30))
 #plot input image
     ax = axs[0]
     ax.imshow(image)
@@ -112,7 +112,7 @@ def LPF_compare(image, radius, desired_color):
     """Plots the image and the low pass filter image for comparison"""
     lpf_image = edges.low_pass_filter(image, radius, desired_color)
 #create subplot
-    fig, axs = plt.subplots(1,2, figsize = (15,15))
+    fig, axs = plt.subplots(1,2, figsize = (30,30))
 #plot input image
     ax = axs[0]
     ax.imshow(image)
