@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #from function files
-from RockstarLifestyle import training_images
+from rockstar_lifestyle import training_images
 
 
 #Function 1: Generates images with random pixels
@@ -20,24 +20,24 @@ def rand_im_gen(n):
     imgarray = []
     #loops through images and pixel placement values
     for i in range(0, n):
-	#creates a 250x250 pixel image
+        #creates a 250x250 pixel image
         img = Image.new('L', [250, 250])
         draw = ImageDraw.Draw(img)
-	#creates reproducibility
+        #creates reproducibility
         np.random.seed(123+i)
         for j in range(0,img.size[0]):
-           for k in range(0, img.size[0]):
+            for k in range(0, img.size[0]):
                 a = randint(0,50)+(3*j)
                 b = randint(0,50)+(3*k)
                 c = a+1
                 d = b+1
                 draw.ellipse([a,b,c,d], fill=255)
-	#creates random jumps in the counter
+        #creates random jumps in the counter
                 k=k+randint(90,100)
             j = j+randint(90,100)
-	#saves the image as a numpy array
+        #saves the image as a numpy array
         array = np.array(img)
-	#adds new array to the list of arrays
+        #adds new array to the list of arrays
         imgarray.append(array)
     return imgarray
 
@@ -97,22 +97,22 @@ def im_gen_circles(n):
     k=2
     imgarray = []
     for i in range(0, n):
-	#creates 250x250 image
-	img = Image.new('L', [250, 250])
-	draw = ImageDraw.Draw(img)
-	y = randint(9,50)
-	z = randint(9,50)
-	for k in range (2, 240, y):
+        #creates 250x250 image
+        img = Image.new('L', [250, 250])
+        draw = ImageDraw.Draw(img)
+        y = randint(9,50)
+        z = randint(9,50)
+        for k in range (2, 240, y):
             for j in range (2, 240, z):
-		 a = j
-	        b = k
-	        c = j+8
-		d = k+8
-		draw.ellipse([a,b,c,d], fill=255)
-	#saves the image as a numpy array
-	array = np.array(img)
-	#adds a callable feature for array
-	imgarray.append(array)
+                a = j
+                b = k
+                c = j+8
+                d = k+8
+                draw.ellipse([a,b,c,d], fill=255)
+        #saves the image as a numpy array
+        array = np.array(img)
+        #adds a callable feature for array
+        imgarray.append(array)
     return imgarray
 
 
@@ -135,20 +135,20 @@ def pix_count_im_circles(array, array_index):
 #Outputs: dataframe containing index, circles, black pixels, and total.
 
 def pix_count_array_circles(array):
-     """Counts the number of pixels for the array of circle images"""
-     i = 0
+    """Counts the number of pixels for the array of circle images"""
+    i = 0
     #Dataframe to fill with outputs
     pixel_count = pd.DataFrame(columns=['Index','Object',
                                         'Black','Total'])
     #loops through the images in the input array
     for i in range(0,len(array)):
-	array_index = i
+        array_index = i
         black, obj_normalized = training_images.pix_count_im_circles(
                         	                  array, array_index)
-	#62500 pixels total with 69 pixels per circle
-	total = black + obj_normalized*69
+        #62500 pixels total with 69 pixels per circle
+        total = black + obj_normalized*69
         #updates dataframe
-	pixel_count.loc[i] = [i, obj_normalized, black, total]
+        pixel_count.loc[i] = [i, obj_normalized, black, total]
     return pixel_count
 
 
@@ -166,23 +166,23 @@ def im_gen_rect(n):
     k=2
     imgarray = []
     for i in range(0, n):
-	#creates a 250x250 pixel image
-	img = Image.new('L', [250, 250])
-	draw = ImageDraw.Draw(img)
-	#creates random patterning per image
-	y = randint(9,50)
-	z = randint(9,50)
-	for k in range (2, 240, y):
-	    for j in range (2, 240, z):
-	    a = j
-            b = k
-	    c = j+4
-	    d = k+4
-	    draw.rectangle([a,b,c,d], fill=255)
-	#saves the image as a numpy array
-	array = np.array(img)
-	#adds a callable feature for arrays
-	imgarray.append(array)
+        #creates a 250x250 pixel image
+        img = Image.new('L', [250, 250])
+        draw = ImageDraw.Draw(img)
+        #creates random patterning per image
+        y = randint(9,50)
+        z = randint(9,50)
+        for k in range (2, 240, y):
+            for j in range (2, 240, z):
+                a = j
+                b = k
+                c = j + 4
+                d = k + 4
+                draw.rectangle([a,b,c,d], fill=255)
+        #saves the image as a numpy array
+        array = np.array(img)
+        #adds a callable feature for arrays
+        imgarray.append(array)
     return imgarray
 
 
@@ -217,12 +217,12 @@ def pix_count_array_rect(array):
     for i in range(0,len(array)):
         black, obj = training_images.pix_count_im_rect(
                                     array, array_index)
-	array_index = i
-	#There are 25 pixels per rectangle
-	obj_normalized = obj/(25)
-	#62500 pixels should be counted for each 250x250 image
-	total = black + obj
-	pixel_count.loc[i] = [i, obj_normalized, black, total]
+        array_index = i
+        #There are 25 pixels per rectangle
+        obj_normalized = obj/(25)
+        #62500 pixels should be counted for each 250x250 image
+        total = black + obj
+        pixel_count.loc[i] = [i, obj_normalized, black, total]
     return pixel_count
 
 
@@ -260,8 +260,8 @@ def im_gen_circles_and_rect(n):
                 g = m+4
                 h = n+4
                 draw.rectangle([e,f,g,h], fill=255)
-	#saves the image as a numpy array
+        #saves the image as a numpy array
         array = np.array(img)
-	#adds a callable feature for arrays
+        #adds a callable feature for arrays
         imgarray.append(array)
     return imgarray
