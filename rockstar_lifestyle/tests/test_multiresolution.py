@@ -40,11 +40,13 @@ def test_cumulative_hist():
 #function running
     hist = multiresolution.cumulative_hist(gauss_blur_images, bin_list)
 #asserts and checks
+    assert isinstance(gauss_blur_list, list), "input is wrong"
 
     return hist
 
 #Function 5: Test for determining plot 1 and plot 2
 def test_diff_plot_determination():
+    """Test: Creates cumlative histograms and splits them into plot 1 and 2"""
 #inputs for function
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
@@ -58,6 +60,7 @@ def test_diff_plot_determination():
 
 #Function 6: Test of obtianing difference histograms between two cumulative histograms
 def test_diff_hist():
+    """Test: Determines differences between two cumulative histogram"""
 #inputs for functions
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
