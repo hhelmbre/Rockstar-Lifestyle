@@ -206,7 +206,7 @@ def pix_count_im_rect(array, array_index):
 #Inputs: array from im_gen_rect
 #Outputs: dataframe containing index, rectangles, black pixels and total
 
-def pixel_counter_whole_array_rectangles(array):
+def pix_count_array_rect(array):
     """Counts the number of rectangles per image"""
     i = 0
     array_index = 1
@@ -231,7 +231,7 @@ def pixel_counter_whole_array_rectangles(array):
 #Inputs: number of images
 #Outputs: an array that has the images saved as numpy arrays
 
-def im_genr_circles_and_rects(n):
+def im_gen_circles_and_rect(n):
     np.random.seed(127)
     i=0
     j=2
