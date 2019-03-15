@@ -6,94 +6,97 @@ from matplotlib import pyplot as plt
 from rockstar_lifestyle import edges, fouriertransform, preprocessing
 
 
-#Function 1: Test of high pass filter function from filter_functions
+#Function 1: Test of high pass filter function from edges
 def test_high_pass_filter():
     """Test: takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
-#inputs for the functions
+    #inputs for the functions
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
-#function performance
+    #function performance
     hpf_image = edges.high_pass_filter(image, radius, desired_color) #runs the Function
-#function asserts and checks
+    #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input is the wrong form"
     assert isinstance(image, Image.Image), "input is in the wrong form"
     assert isinstance(hpf_image, np.ndarray), "output is the wrong form"
+    assert hpf_image(0) > 0, "mask was not applied correctly"
     return hpf_image
 
-#Function 2: Test of HPF compare functions from filter_functions
+#Function 2: Test of HPF compare functions from edges
 def test_HPF_compare():
     """Test: Plots the image and the high pass filter image for comparison"""
-#inputs for the functions
+    #inputs for the functions
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
-#function performance
+    #function performance
     edges.HPF_compare(image, radius, desired_color)
-#function asserts and checks
+    #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input is the wrong form"
-    #assert isinstance(image, Image.Image), "input is in the wrong form"
+    assert isinstance(image, Image.Image), "input is in the wrong form"
     return
 
-#Function 3: Test of low pass filter function from filter_functions
+#Function 3: Test of low pass filter function from edges
 def test_low_pass_filter():
     """Test: takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
-#function inputs
+    #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
-#function performance
+    #function performance
     lpf_image = edges.low_pass_filter(image, radius, desired_color)
-#function asserts and checks
+    #function asserts and checks
     assert isinstance(radius, int), "input is the wrong form"
     assert isinstance(desired_color, str), "input needs to be a string called r or g or b"
     assert isinstance(image, Image.Image), "input is in the wrong form"
     assert isinstance(lpf_image, np.ndarray), "output is in the wrong form"
+    assert lpf_image(0) ==0, "mask was not applied correctly"
     return lpf_image
 
-#Function 4: Test of LPG compare functions from filter_functions
+#Function 4: Test of LPG compare functions from edges
 def test_LPF_compare():
     """Test: Plots the image and the low pass filter image for comparison"""
-#input for function
+    #input for function
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
     desired_color = "b"
-#run function
+    #run function
     edges.low_pass_filter(image, radius, desired_color)
-#asserts and checks
+    #asserts and checks
     assert isinstance(image, Image.Image), "input is in the wrong form"
     return
 
-#Function 5: Test of band pass filter functions from filter_functions
+#Function 5: Test of band pass filter functions from edges
 def test_band_pass_filter():
     """Test: takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied"""
-#function inputs
+    #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radiusin = 50
     radiusout = 100
     desired_color = "b"
-#function performance
+    #function performance
     bpf_image = edges.band_pass_filter(image, radiusin, radiusout, desired_color)
-#function asserts and checks
+    #function asserts and checks
     assert isinstance(radiusin, int), "input is the wrong form"
     assert isinstance(radiusout, int), "input is the wrong form"
     assert isinstance(image, Image.Image), "input is in the wrong form"
     assert isinstance(desired_color, str), "input needs to be a string called r or g or b"
     assert isinstance(bpf_image, np.ndarray), "output is in the wrong form"
+    assert bpf_image(0) ==0, "mask was not applied correctly"
     return
 
-#Function 6: Test of BPF comparison function from filter_functions
+#Function 6: Test of BPF comparison function from edges
 def test_BPF_compare():
     """Test: Plots the image and the low pass filter image for comparison"""
-#function Inputs
+    #function Inputs
     image = Image.open('Test_Photo_fromMike.png')
     radiusin = 50
     radiusout = 100
     desired_color = "b"
-#function performance
+    #function performance
     edges.BPF_compare(image, radiusin, radiusout, desired_color)
-#asserts and checks
+    #asserts and checks
     assert isinstance(image, Image.Image), "input is in the wrong form"
     return

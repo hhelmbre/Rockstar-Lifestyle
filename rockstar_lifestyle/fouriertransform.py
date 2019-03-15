@@ -14,7 +14,7 @@ def Magnitude_Spectrum(image):
     m_spec= np.log(np.abs(fshift))
     return m_spec
 
-#Function 2: Performs the fourier transform with steps to get fshift- used within filter functions
+#Function 2: Performs the fourier transform to get fshift
 #Steps: fourier transform, fourier shift, gets the magnitude Spectrum
 #Inputs: image
 #Outputs: fshift
@@ -33,3 +33,13 @@ def fourier_fshift(image):
 #     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
 #     plt.show()
 #     return
+
+#Function 4: Performs an inverse fourier transform
+#Steps: unshifts the image, inverse fourier, normalizes the image
+#Inputs: f_shift
+#Outputs: image array of inverse fouriered image
+def inverse_fourier(f_shift):
+    image_revert = np.fft.ifftshift(hpf_fshift)
+    image = np.fft.ifft2(image_revert)
+    image = np.abs(image)
+    return image

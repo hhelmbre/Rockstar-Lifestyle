@@ -23,25 +23,26 @@ def image_import():
 def image_prep():
     pass
 
-#Function 3: Gaussian Filter Application
-#Input 1: the image that the filter will be applied
-#Input 2: the list of gaussian blur levels that will be applied
-
-#Functionality: applies a loop that goes through the gauss blur lists
-
-#initializes the gauss_blurs list for appending later
+#Function 3: Gausian filter application
+#Steps: uses for loop to apply a guassian blur to all levels in list
+#Input: input image, gaussian blur list
+#Output: creates the gauss blur list for later
 
 def gauss_filter(image, gauss_blur_list):
+    """Applies a Guassian Blur to all levels in list"""
     gauss_blurs = []
     for levels in gauss_blur_list:
         gauss_blur = gaussian_filter(image, sigma=levels)
         gauss_blurs.append(gauss_blur)
     return gauss_blurs
 
-#Function 5: Obtaining Histograms
-#need to have variable bins functionality as well
 
+#Function 4: Obtaining Histograms
+#Steps: cycles through images and bins to plot histogram and append to hist list
+#Input: gaussian blured images, list of bins
+#Output: list of histograms including one for each image for all bins
 def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
+    """Creates a cumulative histogram through list"""
     hist = []
     for images in gauss_blur_images:
         for bin_count in bin_list:
@@ -99,20 +100,26 @@ def nofig_cumulative_hist(
 
 
 #Function 5: Determines plot 1 and 2 from initial image, blur list, and bin list
-#Steps: load all input, run the cumulative_hist function and split the function into one and two
+#Steps: load all input, run the cumulative_hist function, split into one and two
 #Inputs: intial image, blur list and bin list
 #Outputs: histogram plot one and two
 def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
+    """Creates cumlative histograms and splits them into plot 1 and 2"""
     image = preprocessing.color_split_image(image, desired_color)
-    gauss_blur_images = MultiresHist.gauss_filter(image, gauss_blur_list)
-    hist = MultiresHist.cumulative_hist(gauss_blur_images, bin_list)
+    gauss_blur_images = multiresolution.gauss_filter(image, gauss_blur_list)
+    hist = multiresolution.cumulative_hist(gauss_blur_images, bin_list)
     hist1_plot = hist[0]
     hist2_plot = hist[1]
     return hist1_plot, hist2_plot
 
-#Function 6: Obtaining difference histograms between two cumulative histograms
+
+#Function 6: Determines differences between two cumulative histograms
+#Steps: load two cumulative histograms, loop all bins/arrays to determine differences
+#Inputs: two cumulative histograms
+#Outputs: height difference for all bins/arrays
 
 def diff_hist(hist1_plot, hist2_plot):
+    """Determines differences between two cumulative histograms"""
     bins1 = hist1_plot[0]
     bins2 = hist2_plot[0]
     bins = len(bins1)
@@ -134,6 +141,10 @@ def diff_hist(hist1_plot, hist2_plot):
 
 #Function 8: Function that puts it all together and outputs the concatenated
 ## histograms
+#Function 8: Determines differences between two cumulative histograms
+#Steps: load two cumulative histograms, loop all bins/arrays to determine differences
+#Inputs: two cumulative histograms
+#Outputs: height difference for all bins/arrays
 
 def Multi_res_hist_full(image, bin_list, gauss_blur_list, show_figs = True):
     arr = np.array(image)
