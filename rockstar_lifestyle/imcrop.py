@@ -10,7 +10,7 @@ import tifffile
 
 import warnings
 
-import MultiresHist as mH
+from rockstar_lifestyle import multiresolution as mH
 
 #
 # Made by: Rockstar-Lifestyle | UW DIRECT | 2019
@@ -29,49 +29,61 @@ class tileData():
 		self.res = res
 		self.Data = []
 
-	def extractData(self, path = '', file = '', filetype = '.png'):
+	def extractData(self, path = '',
+					file = '', filetype = '.png'):
 		self.im_path = path + file + filetype
 		self.Data = sio.imread(self.im_path)
 
-class MRHData():
-	# Creating an identifier for every image for later use in neural network
-	def __init__(self, imgid, image, MRH, GBL, bin_list):
-		self.imgid = imgid
-		self.image = image
-		self.MRH = MRH
-		self.GBL = GBL
-		self.bin_list = bin_list
+class imgID():
+    # Creating an identifier for every image for later use in neural network
+    def __init__(self, name,
+    			 image):
+        self.name = name
+        self.image = image
+        self.MRH = []
+        self.GB = []
+        self.bin_list = []
+        self.heights = []
+        self.count = []
 
-		self.heights = []
+    def calc_heights(self, plt1,
+    				 plt2):
+        self.heights = mH.diff_hist(plt1, plt2)
 
-	def calc_Heights(self, plt1, plt2):
-		self.heights = mH.diff_hist(plt1, plt2)
+    def calc_MRH(self, bins,
+    			 show_figs = False):
+        cumulative_data = []
+        if self.GB == []:
+            warnings.warn("Gaussian blur needs to be performed before Multi Res Histogram")
+        self.MRH = mH.cumulative_hist(self.GB, bins, show_figs = show_figs)
+        for i in range(len(self.MRH[0][:])):
+            self.bin_list.append(self.MRH[i][1])
+
+    def calc_GB(self, gauss_blur_list):
+        self.GB = mH.gauss_filter(self.image, gauss_blur_list)
 
 def stackMRH(stacked_img):
 	"""
-	The following function acts as a wrapper for the entire py file. It will input an image file
-	and given resolution and output a stacked set of cropped tif images. It also saves the set
-	into a tif image set on the current folder
-
-	* Current notes: I only have this running for a png input for the purposes of our project, it
-	  				 will only output the green band of the images
-
 	Parameters
 	----------
-	path: str : String of path of file in the form of r"C:/.../.../"
-	file: str : String of file name to crop
-	filetype: str : Type of file - only use '.png' or '.tif'
-	res: int tuple : resolution (res_x, res_y) in pixels of cropped image
+	stacked_img:  :
 
 	Return
 	------
-	img_stack : np.uint16 : (n, res_x, res_y) array of n stacks of
-							cropped images
+	objlist : list[objects] :
 	"""
 
-	for k in len(stacked_img[:,_,_]):
-
-		mH.Multi_res_hist_full(stacked_img[k,:,:], bin_list, gauss_blur_list)
+    objlist = []
+    for k in range(len(stacked_img[:,:,0])):
+        plt = []
+        obj = imgID(dict({'Image' : '{}/{}'.format((k+1),len(stacked_img[:,:,0]))}), stacked_img[k,:,:])
+        obj.calc_GB(gauss_blur_list)
+        obj.calc_MRH(bin_list, show_figs = False)
+        plt1 = obj.MRH[0]
+        plt2 = obj.MRH[1]
+        obj.calc_heights(plt1,plt2)
+        objlist.append(obj)
+    return objlist
 
 def stackLoad(path = '', file = ''):
 	"""
@@ -88,7 +100,8 @@ def stackLoad(path = '', file = ''):
 	return sio.imread('{}{}.tif'.format(path, file))
 
 
-def imgCrop(path = '', file = '', filetype = '.png', res = (256,256)):
+def imgCrop(path = '', file = '',
+		   filetype = '.png', res = (256,256)):
 	"""
 	The following function acts as a wrapper for the entire py file. It will input an image file
 	and given resolution and output a stacked set of cropped tif images. It also saves the set
@@ -116,7 +129,7 @@ def imgCrop(path = '', file = '', filetype = '.png', res = (256,256)):
 
 		Parameters
 		----------
-		td: object : tileData() object containing required data
+		td : object : tileData() object containing required data
 
 		Return
 		------
@@ -158,8 +171,11 @@ def imgCrop(path = '', file = '', filetype = '.png', res = (256,256)):
 
 		for j in range(len(_img[0,:])//res_x):
 		    for i in range(len(_img[:,0])//res_y):
-		        # img_loc ='({}:{},{}:{})'.format(i*offset[0]+border[0], i*offset[0]+border[0]+offset[0], j*offset[1]+border[1],j*offset[1]+border[1]+offset[1])
-		        img_crop = _img[i*offset[0]+border[0]:i*offset[0]+border[0]+offset[0], j*offset[1]+border[1]:j*offset[1]+border[1]+offset[1]]
+		        # img_loc ='({}:{},{}:{})'.format(i*offset[0]+border[0],
+		        # 			i*offset[0]+border[0]+offset[0],
+		        # 			j*offset[1]+border[1],j*offset[1]+border[1]+offset[1])
+		        img_crop = _img[i*offset[0]+border[0]:i*offset[0]+border[0]+offset[0],
+		        			   j*offset[1]+border[1]:j*offset[1]+border[1]+offset[1]]
 		        img_list.append(img_crop)
 		img_stack = np.swapaxes(np.dstack(img_list), 2, 0)
 		img_stack = np.swapaxes(img_stack, 2, 1)
