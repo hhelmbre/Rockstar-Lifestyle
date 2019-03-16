@@ -39,7 +39,7 @@ def fourier_fshift(image):
 #Inputs: f_shift
 #Outputs: image array of inverse fouriered image
 def inverse_fourier(f_shift):
-    image_revert = np.fft.ifftshift(hpf_fshift)
+    image_revert = np.fft.ifftshift(f_shift)
     image = np.fft.ifft2(image_revert)
     image = np.abs(image)
     return image

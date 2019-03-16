@@ -16,7 +16,7 @@ from rockstar_lifestyle import multiresolution, preprocessing
 
 #Function 3: Test of Gaussian Filter Application
 def test_gauss_filter():
-    """Test: Applies a Guassian Blur to all levels in list"""s
+    """Test: Applies a Guassian Blur to all levels in list"""
     #inputs for functions
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
