@@ -245,7 +245,7 @@ def save_objects(dataset, name = 'untitled.dat'):
 			pickle.dump(value, output, pickle.HIGHEST_PROTOCOL)
 
 
-def load_objects(name = untitled.dat):
+def load_objects(name = 'untitled.dat'):
 	"""
 	The following function will load a object-based dataset
 
@@ -271,8 +271,8 @@ def load_objects(name = untitled.dat):
 	items = _loadall()
 	output = []
 	for i in items:
-    	output.append(i)
-    return output
+		output.append(i)
+	return output
 
 
 def create_neural_set(stacked_img, prev_set = None,
@@ -319,11 +319,11 @@ def accuracy(test_x, test_y,
 	t = 0
 	tot = len(df_labels['success'])
 	for i in df_labels['success']:
-    	if i == True:
-        	t += 1
-    if output == True:
-    	print("Out of {} values, {} were True with an accuracy of {}".format(tot, t, t/tot))
-    acc = t/tot
+		if i == True:
+			t += 1
+	if output == True:
+		print("Out of {} values, {} were True with an accuracy of {}".format(tot, t, t/tot))
+	acc = t/tot
 	return acc
 
 def neuralnet(obj = []):
