@@ -89,6 +89,23 @@ def centroid_distance(image_centroid, object_centroid, row):
     distance = math.sqrt((X1-X2)**2+(Y1-Y2)**2)
     return distance
 
+def distancesarr(image_centroid, object_centroids):
+    distances = []
+    j = 0
+    for row in object_centroids:
+        distance = centroid_distance(image_centroid, object_centroids, j)
+        distances.append(distance)
+        j +=1
+    return distances
+
+def objectcentroids(image, block_size):
+    '''obtaining the object centroids'''
+    global_binarys = global_binary(image)
+    object_centroids = feature.blob_log(global_binarys)
+    local_binarys = local_binary(image, block_size)
+    object_centroids_local = feature.blob_log(local_binarys)
+    return object_centroids, object_centroids_local
+
 def distance_histograms(image, block_size):
     '''obtaining 10-bin histograms of centroid distances'''
     otsu_global_labels = global_labels(image)
@@ -100,23 +117,10 @@ def distance_histograms(image, block_size):
     image_centroid = properties_global[0].centroid
     image_centroid_adaptive = properties_local[0].centroid
 
-    global_binarys = global_binary(image)
-    object_centroids = feature.blob_log(global_binarys)
-    local_binarys = local_binary(image, block_size)
-    object_centroids_local = feature.blob_log(local_binarys)
+    object_centroids, object_centroids_local = objectcentroids(image, block_size)
 
-    distances_global = []
-    j=0
-    for row in object_centroids:
-        distance = centroid_distance(image_centroid, object_centroids, j)
-        distances_global.append(distance)
-        j += 1
-    distances_local = []
-    k=0
-    for row in object_centroids_local:
-        distance = centroid_distance(image_centroid_adaptive, object_centroids_local, k)
-        distances_local.append(distance)
-        k += 1
+    distances_global = distancesarr(image_centroid, object_centroids)
+    distances_local = distancesarr(image_centroid_adaptive, object_centroids_local)
 
     fig = plt.figure()
     ax1 = plt.subplot(211)
@@ -146,5 +150,5 @@ def objectnumber(image, block_size):
     print('Gobal Threshold Object Number:     ', object_number_global)
 
     object_number_local = len(object_centroids_local)
-    print('Local Threshold Object Number:     ', object_number_local)
+    print('Local Threshold Object Number:    ', object_number_local)
     return
