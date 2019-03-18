@@ -40,7 +40,6 @@ import dill as pickle
 #
 
 class NN_Settings():
-
 	def __init__(self, learn_rate, classifier):
 		self.classifier = classifier
 		self.learn_rate = learn_rate
@@ -65,11 +64,11 @@ class test_obj():
 		self.bin_list = []
 		self.heights = []
 		self.count = 0
-	def add_img(self):
-		rand_im_gen(1, self.res)
+
 	# The following is taken from Julia's training_images.py file and
 	# modified to fit the given object with no print output:
-	def rand_im_gen(self, n, res = (256, 256)):
+	def rand_im_gen(self, n,
+				   res = (256, 256)):
 		"""Generates images of random white pixels on black background"""
 		#sets up the output array
 		imgarray = []
@@ -127,7 +126,8 @@ class test_obj():
 			pixel_count.loc[i] = [i, obj, black, total]
 		self.count = pixel_count['Object'][0]
 
-	def im_gen_rect(self, n, res = (256, 256)):
+	def im_gen_rect(self, n,
+				   res = (256, 256)):
 		"""Generates images with random rectangles on background"""
 		#Seeds the randomness for reproducibilitiy
 		np.random.seed(126)
@@ -207,7 +207,8 @@ class test_obj():
 				 show_figs = False):
 		cumulative_data = []
 		if self.GB == []:
-			warnings.warn("Gaussian blur needs to be performed before Multi Res Histogram")
+			warnings.warn("Gaussian blur needs to be performed before " +
+						 "Multi Res Histogram")
 		self.MRH = mH.cumulative_hist(self.GB, bins, show_figs = show_figs)
 		for i in range(len(self.MRH[0][:])):
 			self.bin_list.append(self.MRH[i][1])
@@ -218,7 +219,6 @@ class test_obj():
 	def calc_heights(self, plt1,
 					 plt2):
 		self.heights = mH.diff_hist(plt1, plt2)
-
 
 
 def save_objects(dataset, name = 'untitled.dat'):
@@ -232,10 +232,49 @@ def save_objects(dataset, name = 'untitled.dat'):
 	dataset : array[objects] :
 	name : str : name of
 
+	Baby Dill
+	---------
+	Whilst walking down the street one day,
+	I saw upon the drain,
+	A little green dill pickle,
+	That was beaten by the rain.
+
+	I picked it up and took it,
+	To my house upon the hill.
+	I placed it in a tiny bed.
+	I named it, Baby Dill.
+
+	I nursed it back to bright green health.
+	Its flesh was plump and firm.
+	Whenever I would touch it,
+	I'm sure I saw it squirm.
+
+	One day when I noticed,
+	My babies wrinkly skin.
+	I grabbed a jar of pickle juice,
+	And I promptly threw it in.
+
+	Within a couple of hours,
+	I thought I'd better check.
+	My baby dill was missing.
+	I was just a wreck.
+
+	That's when I saw my brother,
+	He was sitting in his chair.
+	Eating my dill pickle.
+	As if he didn't care.
+
+	This was the hardest lesson,
+	I've ever had to learn.
+	Now I can't eat pickles.
+	They make my stomach turn.
+
+	- Thomas Plue 2009
 	"""
 	if ".dat" not in name:
 		name = name.rsplit('.', 1)[0] + ".dat"
-		warnings.warn("File saved does not end in '.dat', will have problems reading. Automatically renaming to '{}'.".format(name))
+		warnings.warn("File saved does not end in '.dat', will have problems " +
+					 "reading. Automatically renaming to '{}'.".format(name))
 
 	dir_par_path = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0]
 
@@ -260,9 +299,9 @@ def load_objects(name = 'untitled.dat'):
 	"""
 
 
-	file = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0] + 'data/'
+	dir_par_path = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0] + 'data/'
 	def _loadall():
-		with open(file + name, "rb") as f:
+		with open(dir_par_path + name, "rb") as f:
 			while True:
 				try:
 					yield pickle.load(f)
@@ -275,29 +314,48 @@ def load_objects(name = 'untitled.dat'):
 	return output
 
 
-def create_neural_set(stacked_img, prev_set = None,
-					   bin_list = [3], gauss_blur_list = [0, 3]):
+def create_train_set(n, prev_set = [],
+					 bin_list = [3],
+					 gauss_blur_list = [0, 3]):
 	"""
-	The following function creates a test set based on stacked object array
+	The following function creates a training set based on stacked
+	object array the output of the training set is
 
 
 	Parameters
 	----------
-	 :  :
+	n : int : number of training sets to create
+	prev_set : list[object] : list of training objects that usr might have
+	bin_list : list[int] : list of bins to use in MRH calculations
+	gauss_blur_list : list[int] : list of gaussian blur variables to use
 
 	Return
 	------
-	 :  :
+	prev_set.append(dataset) : list[objects] : list of training data
 	"""
-	if prev_set == None:
-		obj_list = []
-	else:
-		obj_list = prev_set
-	obj_list.append(object)
-	return obj_list
+	dataset = []
+	#obj_list.append(object)
+	lrn_cnt = []
+	value = []
+
+	for i in range(n):
+	    learn_data = test_obj((256, 256))
+	    learn_data.rand_im_gen(1)
+	    learn_data.calc_GB(gauss_blur_list)
+	    learn_data.calc_MRH(bin_list, show_figs = False)
+	    plt1 = learn_data.MRH[0]
+	    plt2 = learn_data.MRH[1]
+	    learn_data.calc_heights(plt1,plt2)
+
+	    dataset.append(learn_data)
+
+
+
+	return prev_set.append(dataset)
 
 def accuracy(test_x, test_y,
-			 classifier, output = False):
+			 classifier,
+			 output = False):
 	"""
 	The following function checks the accuracy of the neural network by
 	sending testing data through the classifier and outputing the
@@ -305,10 +363,10 @@ def accuracy(test_x, test_y,
 
 	Parameters
 	----------
-	test_x : np.array :
-	test_y : np.array :
+	test_x : np.array : testing data
+	test_y : np.array : answered data
 	classifier : object : classifier object set by MLPClassifier
-	output : Bool : Boolean operator to determine whether to output info or not
+	output : bool : Boolean operator to determine whether to output info or not
 
 	Return
 	------
@@ -324,9 +382,11 @@ def accuracy(test_x, test_y,
 	if output == True:
 		print("Out of {} values, {} were True with an accuracy of {}".format(tot, t, t/tot))
 	acc = t/tot
-	return acc
+	return df_labels
 
-def neuralnet(obj = []):
+def neuralnet(dataset = [], NN_settings = None,
+			 train = False,
+			 save_settings = True):
 	"""
 	The following function is a wrapper function that will use a neural network in
 	order to best estimate the protein count of the input images. The solver used
@@ -340,24 +400,51 @@ def neuralnet(obj = []):
 
 	Parameters
 	----------
-	obj : array[object] : dataset to use neural network on
-
+	dataset : array[object] : dataset to use neural network on
+	NN_settings : object : classifier data
+	train : bool : decide on whether to train or test
+	save_settings : bool : decide on whether to save classifier data to 'data' folder
 
 	Return
 	------
-	 :  :
+	count : list : The counts of the input dataset
 	"""
+	assert (NN_settings != None or train == False) ("Neural Network should be training " +
+												   "if there is no settings inputed")
 
 	count = []
+	acc = []
 
-	train_y = lrn_cnt
-	train_X = lrn_dataset
+	if NN_settings == None:
+		classifier = MLPClassifier(solver="lbfgs")
+		classifier.hidden_layer_sizes = (100,) # 1 hidden layer with 100 hidden units
+		classifier.activation = "tanh" # Using a tanh activation
+	else:
+		classifier = NN_settings
+	if train == True:
+		train_X = []
+		train_y = []
+		for k in range(len(dataset)):
+		#    lrn_dataset.append([])
+			value.append([])
+			for i in range(len(dataset[k].heights)//3):
+		        #print(i)
+				value[k].append(dataset[k].heights[i*3])
 
-	classifier = MLPClassifier(solver="lbfgs")
-	classifier.hidden_layer_sizes = (100,) # 1 hidden layer with 100 hidden units
-	classifier.activation = "tanh" # Using a tanh activation
-	classifier.fit(train_X, train_y)
+		for k in range(len(dataset)):
+			lrn_dataset.append([])
+			lrn_cnt.append(dataset[k].count)
+			for ht in value[k]:
+				lrn_dataset[k].append(ht[0])
 
-	for image in obj:
-		count.append(classifier.predict(image.data))
+		classifier.fit(train_X, train_y)
+
+	if save_settings == True:
+		save_objects(classifier, name = 'classifier_info.dat')
+
+	for image in dataset:
+		cnt = classifier.predict(image.data)
+		count.append(cnt)
+		acc.append(accuracy(image.data, cnt, classifier, output = print_acc))
+
 	return count
