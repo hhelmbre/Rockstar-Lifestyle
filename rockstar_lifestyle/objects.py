@@ -89,6 +89,7 @@ def centroid_distance(image_centroid, object_centroid, row):
     distance = math.sqrt((X1-X2)**2+(Y1-Y2)**2)
     return distance
 
+#Function 7: Calculates distances from centroid to image
 def distancesarr(image_centroid, object_centroids):
     """gets the distances between image and objects"""
     distances = []
@@ -99,7 +100,7 @@ def distancesarr(image_centroid, object_centroids):
         j +=1
     return distances
 
-#Function 7: Gets the object centroids for the image
+#Function 8: Finds object centroids
 def objectcentroids(image, block_size):
     """obtaining the object centroids"""
     global_binarys = global_binary(image)
@@ -108,7 +109,7 @@ def objectcentroids(image, block_size):
     object_centroids_local = feature.blob_log(local_binarys)
     return object_centroids, object_centroids_local
 
-#Function 8: Creates a 10-bin histgoram of object to image centroids
+#Function 9: Creates a 10-bin histgoram of object to image centroids
 def distance_histograms(image, block_size):
     """obtaining 10-bin histograms of centroid distances"""
     otsu_global_labels = global_labels(image)
@@ -134,7 +135,7 @@ def distance_histograms(image, block_size):
     fig.tight_layout()
     return
 
-#Function 9: Counts the number of objects in a labeled image
+#Function 10: Counts the number of objects in a labeled image
 def objectnumber(image, block_size):
     """Gets the object number for the global and local thresholds"""
     global_binarys = global_binary(image)
@@ -146,11 +147,11 @@ def objectnumber(image, block_size):
     object_number_global = len(object_centroids)
     print('Gobal Threshold Object Number:     ', object_number_global)
 
-    object_number_local = len(object_centroids_local)
+    object_number_local = len(object_cßentroids_local)
     print('Local Threshold Object Number:    ', object_number_local)
     return
 
-#Function 10: Gets basic stats and prints them of an object property
+#Function 11: Gets basic stats and prints them of an object property
 def stats(property):
     """gets basic stats for whatever property input"""
     mins= min(property)
