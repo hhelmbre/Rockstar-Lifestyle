@@ -14,11 +14,13 @@ from scipy import ndimage
 from skimage import segmentation
 from skimage import data, feature
 import math
+import matplotlib.pyplot as plt
 
 
 
 #Function 1: Wrapping function that does all following functions in one step
 def global_labels(image):
+    '''obtains the labels for objects using the global otsu threshold'''
     image_arr = np.array(image)
     thresh = filters.threshold_otsu(image_arr)
     binary = image_arr > thresh
@@ -32,6 +34,7 @@ def global_labels(image):
 
 #Function 2: Performing the Otsu Threshold
 def local_labels(image, block_size):
+    '''obtains the lables using a local adaptive threshold for objects'''
     block_size = block_size
     image_arr = np.array(image)
     adaptive_thresh = filters.threshold_local(image_arr,
@@ -46,45 +49,22 @@ def local_labels(image, block_size):
     return local_adaptive_labels
 
 #Function 3: Creates a binary mask of image
-def binary_mask(image):
-    pass
+def object_area_hist(properties_local, properties_global):
+    areas_local_adaptive = [prop.bbox_area for prop in properties_local]
+    areas_global = [prop.bbox_area for prop in properties_global]
+    fig = plt.figure()
+    ax1 = plt.subplot(211)
+    ax2 = plt.subplot(212)
 
-#Function 4: Eight item connection of binary binary_mask
-def eight_connect():
-    pass
+    ax1.hist(areas_global, bins=10, density = True, cumulative = False)
+    ax1.set_title('Global Otsu Threshold')
+    ax1.set_ylabel('Frequency')
+    ax1.set_xlabel('Object Area')
 
-#Function 5: Wrapping function for object stats
-def obst_basic_wrap():
-    pass
+    ax2.hist(areas_local_adaptive, bins=10, density = True, cumulative = False)
+    ax2.set_title('Local Threshold')
+    ax2.set_ylabel('Frequency')
+    ax2.set_xlabel('Object Area')
 
-#Function 6: Euler number
-def euler_number():
-    pass
-
-#Function 7: Image centroids
-def image_centroids():
-    pass
-
-#Function 8: Minimum
-def min():
-    pass
-
-#Function 9: Max
-def max():
-    pass
-
-#Function 10: Mean
-def mean():
-    pass
-
-#Function 11: Median
-def median():
-    pass
-
-#Function 12: Variance
-def variance():
-    pass
-
-#Function 13: 10-bin histogram
-def tenbin_hist():
-    pass
+    fig.tight_layout()
+    return
