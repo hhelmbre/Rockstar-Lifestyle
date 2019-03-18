@@ -60,6 +60,7 @@ def local_labels(image, block_size):
 
 #Function 3: Creates a binary mask of image
 def object_area_hist(properties_local, properties_global):
+    '''makes 10-bin histograms of the object areas'''
     areas_local_adaptive = [prop.bbox_area for prop in properties_local]
     areas_global = [prop.bbox_area for prop in properties_global]
     fig = plt.figure()
@@ -90,6 +91,7 @@ def centroid_distance(image_centroid, object_centroid, row):
     return distance
 
 def distancesarr(image_centroid, object_centroids):
+    '''gets the distances between image and objects'''
     distances = []
     j = 0
     for row in object_centroids:
@@ -132,6 +134,7 @@ def distance_histograms(image, block_size):
     return
 
 def objectnumber(image, block_size):
+    '''Gets the object number for the global and local thresholds'''
     global_binarys = global_binary(image)
     object_centroids = feature.blob_log(global_binarys)
 
@@ -146,6 +149,7 @@ def objectnumber(image, block_size):
     return
 
 def stats(property):
+    '''gets basic stats for whatever property input'''
     mins= min(property)
     maxs= max(property)
     means= np.mean(property)
