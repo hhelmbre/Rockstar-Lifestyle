@@ -134,3 +134,17 @@ def distance_histograms(image, block_size):
 
     fig.tight_layout()
     return
+
+def objectnumber(image, block_size):
+    global_binarys = global_binary(image)
+    object_centroids = feature.blob_log(global_binarys)
+
+    local_binarys = local_binary(image, block_size)
+    object_centroids_local = feature.blob_log(local_binarys)
+
+    object_number_global = len(object_centroids)
+    print('Gobal Threshold Object Number:     ', object_number_global)
+
+    object_number_local = len(object_centroids_local)
+    print('Local Threshold Object Number:     ', object_number_local)
+    return
