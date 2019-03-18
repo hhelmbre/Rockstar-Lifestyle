@@ -110,32 +110,24 @@ def distance_histograms(image, block_size):
     '''obtaining 10-bin histograms of centroid distances'''
     otsu_global_labels = global_labels(image)
     local_adaptive_labels = local_labels(image, block_size)
-
     properties_global = measure.regionprops(otsu_global_labels)
     properties_local = measure.regionprops(local_adaptive_labels)
-
     image_centroid = properties_global[0].centroid
     image_centroid_adaptive = properties_local[0].centroid
-
     object_centroids, object_centroids_local = objectcentroids(image, block_size)
-
     distances_global = distancesarr(image_centroid, object_centroids)
     distances_local = distancesarr(image_centroid_adaptive, object_centroids_local)
-
     fig = plt.figure()
     ax1 = plt.subplot(211)
     ax2 = plt.subplot(212)
-
     ax1.hist(distances_global, bins=10, density = True, cumulative = False)
     ax1.set_title('Global Otsu Threshold')
     ax1.set_ylabel('Frequency')
     ax1.set_xlabel('Pixel Distance')
-
     ax2.hist(distances_local, bins=10, density = True, cumulative = False)
     ax2.set_title('Local Threshold')
     ax2.set_ylabel('Frequency')
     ax2.set_xlabel('Pixel Distance')
-
     fig.tight_layout()
     return
 
@@ -151,4 +143,18 @@ def objectnumber(image, block_size):
 
     object_number_local = len(object_centroids_local)
     print('Local Threshold Object Number:    ', object_number_local)
+    return
+
+def stats(property):
+    mins= min(property)
+    maxs= max(property)
+    means= np.mean(property)
+    medians= np.median(property)
+    variances= np.var(property)
+
+    print('Minimum:     ', mins)
+    print('Maximum:     ', maxs)
+    print('Mean:     ', means)
+    print('Median:     ', medians)
+    print('Variance:     ', variances)
     return
