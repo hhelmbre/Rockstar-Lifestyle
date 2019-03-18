@@ -16,7 +16,7 @@ from skimage import data, feature
 import math
 import matplotlib.pyplot as plt
 
-#Function X: Obtaining the Global Threshold binary
+#Function 1: Obtaining the Global Threshold binary
 def global_binary(image):
     '''obtains the binary using the Global Otsu Threshold'''
     image_arr = np.array(image)
@@ -24,6 +24,7 @@ def global_binary(image):
     global_binary = image_arr > thresh
     return global_binary
 
+#Function 2: Obtaining the Local Adaptive Threshold Binary
 def local_binary(image, block_size):
     '''obtains th ebinary of the image using a local adaptive threshold'''
     image_arr = np.array(image)
@@ -32,9 +33,7 @@ def local_binary(image, block_size):
     binary_adaptive = image_arr < adaptive_thresh
     return binary_adaptive
 
-#Function X: Obtaining the Local Adaptive Threshold Binary
-
-#Function X: Wrapping function that does all following functions in one step
+#Function 3: Wrapping function that does all following functions in one step
 def global_labels(image):
     '''obtains the labels for objects using the global otsu threshold'''
     binary = global_binary(image)
@@ -46,7 +45,7 @@ def global_labels(image):
     otsu_global_labels = segmentation.random_walker(binary, markers)
     return otsu_global_labels
 
-#Function 2: Performing the Otsu Threshold
+#Function 4: Performing the Otsu Threshold
 def local_labels(image, block_size):
     '''obtains the lables using a local adaptive threshold for objects'''
     binary = local_binary(image, block_size)
@@ -58,7 +57,7 @@ def local_labels(image, block_size):
     local_adaptive_labels = segmentation.random_walker(binary, markers)
     return local_adaptive_labels
 
-#Function 3: Creates a binary mask of image
+#Function 5: Creates a binary mask of image
 def object_area_hist(properties_local, properties_global):
     '''makes 10-bin histograms of the object areas'''
     areas_local_adaptive = [prop.bbox_area for prop in properties_local]
@@ -80,7 +79,7 @@ def object_area_hist(properties_local, properties_global):
     fig.tight_layout()
     return
 
-#Function x: finds the distance between an object and image centroid
+#Function 6: finds the distance between an object and image centroid
 def centroid_distance(image_centroid, object_centroid, row):
     '''computes distance between an object centroid and image centroid'''
     X1 = image_centroid[0]
@@ -100,6 +99,7 @@ def distancesarr(image_centroid, object_centroids):
         j +=1
     return distances
 
+#Function 7: Gets the object centroids for the image
 def objectcentroids(image, block_size):
     '''obtaining the object centroids'''
     global_binarys = global_binary(image)
@@ -108,6 +108,7 @@ def objectcentroids(image, block_size):
     object_centroids_local = feature.blob_log(local_binarys)
     return object_centroids, object_centroids_local
 
+#Function 8: Creates a 10-bin histgoram of object to image centroids
 def distance_histograms(image, block_size):
     '''obtaining 10-bin histograms of centroid distances'''
     otsu_global_labels = global_labels(image)
@@ -133,6 +134,7 @@ def distance_histograms(image, block_size):
     fig.tight_layout()
     return
 
+#Function 9: Counts the number of objects in a labeled image
 def objectnumber(image, block_size):
     '''Gets the object number for the global and local thresholds'''
     global_binarys = global_binary(image)
@@ -148,6 +150,7 @@ def objectnumber(image, block_size):
     print('Local Threshold Object Number:    ', object_number_local)
     return
 
+#Function 10: Gets basic stats and prints them of an object property
 def stats(property):
     '''gets basic stats for whatever property input'''
     mins= min(property)
