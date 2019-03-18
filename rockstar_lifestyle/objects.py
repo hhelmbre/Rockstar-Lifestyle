@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 #Function 1: Obtaining the Global Threshold binary
 def global_binary(image):
-    '''obtains the binary using the Global Otsu Threshold'''
+    """btains the binary using the Global Otsu Threshold"""
     image_arr = np.array(image)
     thresh = filters.threshold_otsu(image_arr)
     global_binary = image_arr > thresh
@@ -26,7 +26,7 @@ def global_binary(image):
 
 #Function 2: Obtaining the Local Adaptive Threshold Binary
 def local_binary(image, block_size):
-    '''obtains th ebinary of the image using a local adaptive threshold'''
+    """obtains th ebinary of the image using a local adaptive threshold"""
     image_arr = np.array(image)
     adaptive_thresh = filters.threshold_local(image_arr,
                                                     block_size, offset=8)
@@ -35,7 +35,7 @@ def local_binary(image, block_size):
 
 #Function 3: Wrapping function that does all following functions in one step
 def global_labels(image):
-    '''obtains the labels for objects using the global otsu threshold'''
+    """obtains the labels for objects using the global otsu threshold"""
     binary = global_binary(image)
     distance = ndimage.distance_transform_edt(binary)
     local_maxi = peak_local_max(distance, indices=False,
@@ -47,7 +47,7 @@ def global_labels(image):
 
 #Function 4: Performing the Otsu Threshold
 def local_labels(image, block_size):
-    '''obtains the lables using a local adaptive threshold for objects'''
+    """obtains the lables using a local adaptive threshold for objects"""
     binary = local_binary(image, block_size)
     distance = ndimage.distance_transform_edt(binary)
     local_maxi = peak_local_max(distance, indices=False,
@@ -59,7 +59,7 @@ def local_labels(image, block_size):
 
 #Function 5: Creates a binary mask of image
 def object_area_hist(properties_local, properties_global):
-    '''makes 10-bin histograms of the object areas'''
+    """makes 10-bin histograms of the object areas"""
     areas_local_adaptive = [prop.bbox_area for prop in properties_local]
     areas_global = [prop.bbox_area for prop in properties_global]
     fig = plt.figure()
@@ -81,7 +81,7 @@ def object_area_hist(properties_local, properties_global):
 
 #Function 6: finds the distance between an object and image centroid
 def centroid_distance(image_centroid, object_centroid, row):
-    '''computes distance between an object centroid and image centroid'''
+    """computes distance between an object centroid and image centroid"""
     X1 = image_centroid[0]
     Y1 = image_centroid[1]
     X2 = object_centroid[row][0]
@@ -90,7 +90,7 @@ def centroid_distance(image_centroid, object_centroid, row):
     return distance
 
 def distancesarr(image_centroid, object_centroids):
-    '''gets the distances between image and objects'''
+    """gets the distances between image and objects"""
     distances = []
     j = 0
     for row in object_centroids:
@@ -101,7 +101,7 @@ def distancesarr(image_centroid, object_centroids):
 
 #Function 7: Gets the object centroids for the image
 def objectcentroids(image, block_size):
-    '''obtaining the object centroids'''
+    """obtaining the object centroids"""
     global_binarys = global_binary(image)
     object_centroids = feature.blob_log(global_binarys)
     local_binarys = local_binary(image, block_size)
@@ -110,7 +110,7 @@ def objectcentroids(image, block_size):
 
 #Function 8: Creates a 10-bin histgoram of object to image centroids
 def distance_histograms(image, block_size):
-    '''obtaining 10-bin histograms of centroid distances'''
+    """obtaining 10-bin histograms of centroid distances"""
     otsu_global_labels = global_labels(image)
     local_adaptive_labels = local_labels(image, block_size)
     properties_global = measure.regionprops(otsu_global_labels)
@@ -136,7 +136,7 @@ def distance_histograms(image, block_size):
 
 #Function 9: Counts the number of objects in a labeled image
 def objectnumber(image, block_size):
-    '''Gets the object number for the global and local thresholds'''
+    """Gets the object number for the global and local thresholds"""
     global_binarys = global_binary(image)
     object_centroids = feature.blob_log(global_binarys)
 
@@ -152,7 +152,7 @@ def objectnumber(image, block_size):
 
 #Function 10: Gets basic stats and prints them of an object property
 def stats(property):
-    '''gets basic stats for whatever property input'''
+    """gets basic stats for whatever property input"""
     mins= min(property)
     maxs= max(property)
     means= np.mean(property)
