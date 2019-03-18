@@ -66,24 +66,26 @@ def stackMRH(stacked_img):
 	"""
 	Parameters
 	----------
-	stacked_img:  :
+	stacked_img: np.array(np.uint16) : An array of stacked data representing the images
+				 					   taken using the _crop) funciton
 
 	Return
 	------
-	objlist : list[objects] :
+	objlist : list[objects] : list of objects with their own identifier for every cropped image
 	"""
-
-    objlist = []
-    for k in range(len(stacked_img[:,:,0])):
-        plt = []
-        obj = imgID(dict({'Image' : '{}/{}'.format((k+1),len(stacked_img[:,:,0]))}), stacked_img[k,:,:])
-        obj.calc_GB(gauss_blur_list)
-        obj.calc_MRH(bin_list, show_figs = False)
-        plt1 = obj.MRH[0]
-        plt2 = obj.MRH[1]
-        obj.calc_heights(plt1,plt2)
-        objlist.append(obj)
-    return objlist
+	bin_list = [3]
+	gauss_blur_list = [0, 3]
+	objlist = []
+	for k in range(len(stacked_img[:,:,0])):
+		plt = []
+		obj = imgID(dict({'Image' : '{}/{}'.format((k+1),len(stacked_img[:,:,0]))}), stacked_img[k,:,:])
+		obj.calc_GB(gauss_blur_list)
+		obj.calc_MRH(bin_list, show_figs = False)
+		plt1 = obj.MRH[0]
+		plt2 = obj.MRH[1]
+		obj.calc_heights(plt1,plt2)
+		objlist.append(obj)
+	return objlist
 
 def stackLoad(path = '', file = ''):
 	"""
