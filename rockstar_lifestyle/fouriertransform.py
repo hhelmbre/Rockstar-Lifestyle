@@ -4,8 +4,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 
-#Function 1: Performs the fourier transform with steps to get Magnitude_Spectrum
-#Steps: fourier transform, fourier shift, gets the magnitude Spectrum
+#Function 1: Performs the fourier transform with steps 
+#to get Magnitude_Spectrum
+#Steps: fourier transform, fourier shift, gets the magnitude spectrum
 #Inputs: image
 #Outputs: magntidue spectrum array
 def Magnitude_Spectrum(image):
@@ -24,10 +25,10 @@ def fourier_fshift(image):
     fshift= np.fft.fftshift(f)
     return fshift
 
-#Function 3: Plotting the magnitude spectrum made my fourier transformM
+#Function 3: Plotting the magnitude spectrum made my fourier transform
 #Steps: plots the Magnitude Spectrum
 #Input: the magnitude spectrum Output
-#Output: none it just shows the image for funsies
+#Output: image
 # def Plot_M_Spec(m_spec):
 #     plt.show(m_spec)
 #     plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
@@ -39,7 +40,7 @@ def fourier_fshift(image):
 #Inputs: f_shift
 #Outputs: image array of inverse fouriered image
 def inverse_fourier(f_shift):
-    image_revert = np.fft.ifftshift(hpf_fshift)
+    image_revert = np.fft.ifftshift(f_shift)
     image = np.fft.ifft2(image_revert)
     image = np.abs(image)
     return image

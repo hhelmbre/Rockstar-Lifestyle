@@ -1,4 +1,6 @@
-#Purpose: create filters to go over images in an effort to extract infomation
+#Purpose: create filters to go over images in an effort to extract 
+#infomation 
+
 #import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
@@ -15,7 +17,8 @@ def high_pass_filter(image, radius, desired_color):
     """Creates an image that has a high pass filter applied"""
     #Forier transform the image and return fshift.
     fshift = preprocessing.color_split_fshift(image, desired_color)
-    #Build array that masks the entire image - circle of zeros in array of ones
+    #Build array that masks the entire image  
+    #Circle of zeros in array of ones
     row, column = image.size
     center_row = int(row/2)
     center_column = int(column/2)
@@ -77,10 +80,10 @@ def low_pass_filter(image, radius, desired_color):
     return lpf_image
 
 
-#Function 3: Plotting input image and the low pass filter image for comparison
-#Steps: plots the input image, plot low pass filter image
+#Function 4: Plot and compare input image and the low pass filter image
+#Steps: plots the input image and plots low pass filter image
 #Input: input image and desired radius for filter mask
-#Output: none it just shows the image for funsies
+#Output: none, it just shows the image
 
 def LPF_compare(image, radius, desired_color):
     """Plots the image and the low pass filter image for comparison"""
@@ -99,7 +102,8 @@ def LPF_compare(image, radius, desired_color):
 
 
 #Function 5: Performs a Band Pass Filter and returns the modifed image
-#Steps: fourier transform, create mask, apply mask, inverse fourier transform
+#Steps: fourier transform, create mask, apply mask, 
+# and then inverse fourier transform
 #Inputs: image and desired internal and external radius, desired color
 #Outputs: image that has been filtered
 
@@ -126,21 +130,22 @@ def band_pass_filter(image, radiusin, radiusout, desired_color):
     bpf_image = fouriertransform.inverse_fourier(f_shift)
     return bpf_image
 
-#Function 6: Plots input image and the band pass filter image for comparison
+#Function 6: Plots and compares input image and band pass filter image
 #Steps: plots the input image, plot band pass filter image
 #Inputs: Image, desired internal and external radius, desired color
-#Output: none it just shows the image for funsies
+#Output: The image
 def BPF_compare(image, radiusin, radiusout, desired_color):
     """plots the band pass filter versus the input image"""
-#gets the bpf image
-    bpf_image = edges.band_pass_filter(image, radiusin, radiusout, desired_color)
-#create subplot
+    #gets the bpf image
+    bpf_image = edges.band_pass_filter(image, radiusin, 
+                                       radiusout, desired_color)
+    #create subplot
     fig, axs = plt.subplots(1,2, figsize = (30,30))
-#plot input image
+    #plot input image
     ax = axs[0]
     ax.imshow(image)
     ax.set_title('Input')
-#plot high pass filter
+    #plot high pass filter
     ax = axs[1]
     ax.imshow(bpf_image)
     ax.set_title('Band Pass Filter')

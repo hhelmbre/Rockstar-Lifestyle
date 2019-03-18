@@ -55,8 +55,7 @@ def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
             hist.append(hist_itt)
     return hist
 
-def nofig_cumulative_hist(
-                      x, bins):
+def nofig_cumulative_hist(x, bins):
     """
     The following function is based off the hist() class-based function within the
     _axes.py file of matplotlib located in:
@@ -103,6 +102,7 @@ def nofig_cumulative_hist(
 #Steps: load all input, run the cumulative_hist function, split into one and two
 #Inputs: intial image, blur list and bin list
 #Outputs: histogram plot one and two
+
 def diff_plot_determination(image, desired_color, gauss_blur_list, bin_list):
     """Creates cumlative histograms and splits them into plot 1 and 2"""
     image = preprocessing.color_split_image(image, desired_color)
@@ -141,12 +141,13 @@ def diff_hist(hist1_plot, hist2_plot):
 
 #Function 8: Function that puts it all together and outputs the concatenated
 ## histograms
-#Function 8: Determines differences between two cumulative histograms
-#Steps: load two cumulative histograms, loop all bins/arrays to determine differences
-#Inputs: two cumulative histograms
-#Outputs: height difference for all bins/arrays
+#Function 8: Creates and outputs the concatenated histogram
+#Steps: wraps all of the functions
+#Inputs: image, list of bins, list of blurs
+#Outputs: none, shows plot
 
 def Multi_res_hist_full(image, bin_list, gauss_blur_list, show_figs = True):
+    """Wraps all functions and produces a plot of height comparisons"""
     arr = np.array(image)
     gauss_blur_images = gauss_filter(image, gauss_blur_list)
     cumulative_Histograms = cumulative_hist(gauss_blur_images, bin_list, show_figs = show_figs)
