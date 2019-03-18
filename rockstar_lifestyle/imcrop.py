@@ -195,3 +195,4 @@ def imgCrop(path = '', file = '',
 	td.extractData(path, file, filetype)
 	stacked_img = __crop(td)
 	return stacked_img
+
