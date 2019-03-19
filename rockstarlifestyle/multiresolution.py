@@ -51,7 +51,8 @@ def cumulative_hist(gauss_blur_images, bin_list, show_figs = True):
                 hist_itt = plt.hist(images, bins = bin_count,
                                    density = True, cumulative = True)
             else:
-                hist_itt = nofig_cumulative_hist(images, bins = bin_count)
+                hist_itt = nofig_cumulative_hist(images, 
+                                        bins = bin_count)
             hist.append(hist_itt)
     return hist
 
