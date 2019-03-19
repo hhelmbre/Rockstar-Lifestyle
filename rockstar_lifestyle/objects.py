@@ -147,7 +147,7 @@ def objectnumber(image, block_size):
     object_number_global = len(object_centroids)
     print('Gobal Threshold Object Number:     ', object_number_global)
 
-    object_number_local = len(object_cßentroids_local)
+    object_number_local = len(object_centroids_local)
     print('Local Threshold Object Number:    ', object_number_local)
     return
 
