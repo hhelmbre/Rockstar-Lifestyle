@@ -9,11 +9,6 @@ import timeit
 #importing file functions
 from rockstar_lifestyle import multiresolution, preprocessing
 
-
-#Function 1: Test of Image Importing
-
-#Function 2: Test of Image splitting
-
 #Function 3: Test of Gaussian Filter Application
 def test_gauss_filter():
     """Test: Applies a Guassian Blur to all levels in list"""
@@ -67,18 +62,17 @@ def test_diff_hist():
     image = Image.open('Test_Photo_fromMike.png')
     desired_color = 'g'
     gauss_blur_list = [0,1] #function currently only works with two gauss blurs
-    bin_list = [3] #number of bins desired for histogram
+    bin_list = [3]
     #getting the two plots needed to run difference
     hist1_plot, hist2_plot = multiresolution.diff_plot_determination(
         image, desired_color, gauss_blur_list, bin_list)
-        #function running
+    #function running
     heights = multiresolution.diff_hist(hist1_plot, hist2_plot)
     #asserts and checks
     return heights
 
-#Function 7: Test for concatenating difference Histograms
 
-#Function 8: Test for plotting the full multi res histograms
+#Function 8: Test for plotting the full multi res histograms - This test times out takes very long to run
 # def test_Multi_res_hist_full():
 #     """Wraps all functions and produces a plot of height comparisons"""
 # #inputs for functions
