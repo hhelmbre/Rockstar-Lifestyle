@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 #Function 1: Obtaining the Global Threshold binary
 def global_binary(image):
-    """btains the binary using the Global Otsu Threshold"""
+    """obtains the binary using the Global Otsu Threshold"""
     image_arr = np.array(image)
     thresh = filters.threshold_otsu(image_arr)
     global_binary = image_arr > thresh
