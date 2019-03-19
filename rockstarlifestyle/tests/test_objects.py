@@ -4,7 +4,7 @@
 import numpy as np
 import rockstar_lifestyle
 import scipy
-from rockstar_lifestyle import objects, preprocessing
+from rockstarlifestyle import objects, preprocessing
 
 from PIL import Image, ImageFilter, ImageEnhance
 from scipy.ndimage import gaussian_filter

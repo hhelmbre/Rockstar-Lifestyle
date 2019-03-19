@@ -23,8 +23,7 @@ def image_contrast(image, contrast_value):
 #Output: desired color fshift
 def color_split_fshift(image, desired_color):
     """splits the image into r or g or b color frequency then performs a fshift for that color"""
-    image_color = Image.open('Test_Photo_fromMike.png')
-    r,g,b = image_color.split()
+    r,g,b = image.split()
     #if tree split based on desired color
     if desired_color == "b":
         f_blue = np.fft.fft2(b)
@@ -52,8 +51,7 @@ def color_split_fshift(image, desired_color):
 #Output: desired color image
 def color_split_image(image, desired_color):
     """splits the image into r or g or b color frequency then creates image with that color"""
-    image_color = Image.open('Test_Photo_fromMike.png')
-    r,g,b = image_color.split()
+    r,g,b = image.split()
     #if tree split based on desired color
     if desired_color == "b":
         color_image = b

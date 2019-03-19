@@ -11,7 +11,7 @@ from rockstarlifestyle import fouriertransform, preprocessing
 def test_Magnitude_Spectrum():
     """Test: peforms the fourier transform and returns the fshift which is used within filter functions"""
     #inputs for functions
-    image = Image.open('Test_Photo_fromMike.png').convert('L')
+    image = Image.open('../data/protein_matrix_image.png').convert('L')
     #function performance
     m_spec = fouriertransform.Magnitude_Spectrum(image)
     #asserts and checks
@@ -23,7 +23,7 @@ def test_Magnitude_Spectrum():
 def test_fourier_fshift():
     """Test: performs the fourier transform and returns the fshift which is used within filter functions"""
     #inputs for functions
-    image = Image.open('Test_Photo_fromMike.png').convert('L')
+    image = Image.open('../data/protein_matrix_image.png').convert('L')
     #function performance
     fshift = fouriertransform.fourier_fshift(image)
     #asserts and checks
