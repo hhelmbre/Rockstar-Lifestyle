@@ -114,50 +114,53 @@ def test_distancesarr():
     image_centroid = properties_global[0].centroid
     global_binarys = objects.global_binary(image)
     object_centroids = feature.blob_log(global_binarys)
-    row = 3
+    row = [3,3]
     #running the functions
     distances = objects.distancesarr(image_centroid, object_centroids)
     #asserts and checks
     return
 
-# def test_objectcentroids():
-#     #inputs for functions
-#     image = Image.open('../data/protein_matrix_image.png')
-#     desired_color = 'b'
-#     #processing
-#     split = preprocessing.color_split_image(image, desired_color)
-#     contrast_image = preprocessing.image_contrast(split, 2)
-#     block_size = 15
-#     #running the functions
-#     object_centroids, object_centroids_local = objects.objectcentroids(contrast_image, block_size)
-#     #asserts and checks
-#     return
-#
-# def test_distance_histograms():
-#     #inputs for functions
-#     image = Image.open('../data/protein_matrix_image.png')
-#     desired_color = 'b'
-#     #processing
-#     split = preprocessing.color_split_image(image, desired_color)
-#     contrast_image = preprocessing.image_contrast(split, 2)
-#     block_size = 15
-#     #running the functions
-#     objects.distance_histograms(contrast_image, block_size)
-#     #asserts and checks
-#     return
-#
-# def test_objectnumber():
-#     #inputs for functions
-#     image = Image.open('../data/protein_matrix_image.png')
-#     desired_color = 'b'
-#     #processing
-#     split = preprocessing.color_split_image(image, desired_color)
-#     contrast_image = preprocessing.image_contrast(split, 2)
-#     block_size = 15
-#     #running the functions
-#     objects.objectnumber(contrast_image, block_size)
-#     #asserts and checks
-#     return
+def test_objectcentroids():
+    """Test: obtaining the object centroids"""
+    #inputs for functions
+    image = Image.open('../data/protein_matrix_image.png')
+    desired_color = 'b'
+    #processing
+    split = preprocessing.color_split_image(image, desired_color)
+    contrast_image = preprocessing.image_contrast(split, 2)
+    block_size = 15
+    #running the functions
+    object_centroids, object_centroids_local = objects.objectcentroids(contrast_image, block_size)
+    #asserts and checks
+    return
+
+def test_distance_histograms():
+    """Test: obtaining 10-bin histograms of centroid distances"""
+    #inputs for functions
+    image = Image.open('../data/protein_matrix_image.png')
+    desired_color = 'b'
+    #processing
+    split = preprocessing.color_split_image(image, desired_color)
+    contrast_image = preprocessing.image_contrast(split, 2)
+    block_size = 15
+    #running the functions
+    objects.distance_histograms(contrast_image, block_size)
+    #asserts and checks
+    return
+
+def test_objectnumber():
+    """Test: Gets the object number for the global and local thresholds"""
+    #inputs for functions
+    image = Image.open('../data/protein_matrix_image.png')
+    desired_color = 'b'
+    #processing
+    split = preprocessing.color_split_image(image, desired_color)
+    contrast_image = preprocessing.image_contrast(split, 2)
+    block_size = 15
+    #running the functions
+    objects.objectnumber(contrast_image, block_size)
+    #asserts and checks
+    return
 
 def test_stats():
     """Test: gets basic stats for whatever property input"""
@@ -170,13 +173,9 @@ def test_stats():
     #labels
     otsu_global_labels = objects.global_labels(image)
     properties_global = measure.regionprops(otsu_global_labels)
-    image_centroid = properties_global[0].centroid
-    global_binarys = objects.global_binary(image)
-    object_centroids = feature.blob_log(global_binarys)
-    row = 3
-    distance = objects.centroid_distance(image_centroid, object_centroids, row)    #running the functions
+    areas_global = [prop.bbox_area for prop in properties_global]
     #final inputs
-    property = distance
+    property = areas_global
     #running the functions
     objects.stats(property)
     #asserts and checks
