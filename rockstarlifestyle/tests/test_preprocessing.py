@@ -12,7 +12,7 @@ from rockstarlifestyle import preprocessing, fouriertransform
 def test_image_contrast():
     """Test: increases the contrast in order to make possible fourier transforms smoother"""
     #inputs for functions
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     contrast_value = 2
     #function performance
     enhanced_image = preprocessing.image_contrast(image, contrast_value)
@@ -23,7 +23,7 @@ def test_image_contrast():
 def test_color_split_fshift():
     """Test: splits the image into r or g or b color frequency then performs a fshift for that color"""
     #inputs for the function
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     desired_color = 'b'
     #function performance
     fshift = preprocessing.color_split_fshift(image, desired_color)
@@ -37,7 +37,7 @@ def test_color_split_fshift():
 def test_color_split_image():
     """Test: splits the image into r or g or b color frequency then produces the desired color image"""
     #inputs for the function
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     desired_color = 'b'
     #function performance
     color_image = preprocessing.color_split_image(image, desired_color)
