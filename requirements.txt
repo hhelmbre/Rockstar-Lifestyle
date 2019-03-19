@@ -13,4 +13,5 @@ seaborn
 Shapely
 tifffile
 fijibin
+dill
 PIL
