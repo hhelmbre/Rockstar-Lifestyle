@@ -66,7 +66,9 @@ class test_obj():
 		self.count = 0
 
 	# The following is taken from Julia's training_images.py file and
-	# modified to fit the given object with no print output:
+	# modified to fit the given object with no print output. This will
+	# all be changed in future iterations, but with time constraints it
+	# is left in.
 	def rand_im_gen(self, n,
 				   res = (256, 256)):
 		"""Generates images of random white pixels on black background"""
@@ -227,6 +229,9 @@ def save_objects(dataset, name = 'untitled.dat'):
 	of pickle (a function that stores large amounts of object data) into a subfolder
 	named 'data'. The
 
+	* Note: If only saving a single object, put in a [list] of len 1 i.e.
+	  save_objects([obj], name = 'file_name')
+
 	Parameters
 	----------
 	dataset : array[objects] :
@@ -271,46 +276,81 @@ def save_objects(dataset, name = 'untitled.dat'):
 
 	- Thomas Plue 2009
 	"""
+
 	if ".dat" not in name:
 		name = name.rsplit('.', 1)[0] + ".dat"
 		warnings.warn("File saved does not end in '.dat', will have problems " +
 					 "reading. Automatically renaming to '{}'.".format(name))
 
-	dir_par_path = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0]
+	dir_par_path = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
 
-	with open(dir_par_path + 'data/' + name, 'wb') as output:
+	if not os.path.exists(dir_par_path + "/data"):
+		os.makedirs(dir_par_path + "/data")
 
+	with open(dir_par_path + "/data/" + name, 'wb') as output:
+		print("saving to: " + dir_par_path + "/data/")
 		for value in dataset:
 			pickle.dump(value, output, pickle.HIGHEST_PROTOCOL)
 
 
 def load_objects(name = 'untitled.dat'):
 	"""
-	The following function will load a object-based dataset
+	The following function will load an object-based dataset using dill which is a version
+	of pickle (a function that stores large amounts of object data) into a subfolder
 
 	Parameters
 	----------
 	name : str : name of filename to use, default = untitled.dat
 
-
 	Return
 	------
 	output : array[objects] : list of objects
+
+
 	"""
+	if ".dat" not in name:
+		name = name.rsplit('.', 1)[0] + ".dat"
+		warnings.warn("File saved does not end in '.dat', will have problems " +
+					 "reading. Automatically renaming to '{}'.".format(name))
+
+	dir_par_path = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
+
+	def _loadall(dir_par_path, name):
+		"""
+		The following function is a private function for load_objects that will
+		load a generator for the file name in the given path
+
+		Parameters
+		----------
+		dir_par_path : str : folder path of the given file
+
+		Return
+		------
+		generator : generator : generator of the loaded file
+		or
+		[] if directory doesn't exist
 
 
-	dir_par_path = os.path.dirname(os.path.realpath(__file__)).rsplit('/', 1)[0] + 'data/'
-	def _loadall():
-		with open(dir_par_path + name, "rb") as f:
+		"""
+		if not os.path.exists(dir_par_path + "/data"):
+			warnings.warn("Path doesn't exist. Try downloading" +
+						 "something first to create /data/ director.")
+			return []
+
+		with open(dir_par_path + "/data/" + name, "rb") as f:
 			while True:
 				try:
 					yield pickle.load(f)
 				except EOFError:
 					break
-	items = _loadall()
+
+
+	items = _loadall(dir_par_path, name)
 	output = []
+
 	for i in items:
 		output.append(i)
+
 	return output
 
 
@@ -318,9 +358,14 @@ def create_train_set(n, prev_set = [],
 					 bin_list = [3],
 					 gauss_blur_list = [0, 3]):
 	"""
-	The following function creates a training set based on stacked
-	object array the output of the training set is
+	The following function creates a training set of n datasets. If a previous
+	set is provided, the function will add to the previous set and output a
+	backup set along with the changed set.
 
+	* Note: This function is weak, the image formation is not up to par and will
+	  be changed in the future to provide a better training set for the neural
+	  network. Right now, the training sets output only protein counts between
+	  5600 and 5800 proteins which will not train the neural network properly.
 
 	Parameters
 	----------
@@ -331,27 +376,35 @@ def create_train_set(n, prev_set = [],
 
 	Return
 	------
-	prev_set.append(dataset) : list[objects] : list of training data
+	prev_set : list[objects] : list of training data
+	backup : list[objects] : list of backup training data in case new set is
+							 unacceptable
+
+
 	"""
 	dataset = []
-	#obj_list.append(object)
 	lrn_cnt = []
 	value = []
+	backup = prev_set # In case the user has a good dataset and wants to revert
 
 	for i in range(n):
-	    learn_data = test_obj((256, 256))
-	    learn_data.rand_im_gen(1)
-	    learn_data.calc_GB(gauss_blur_list)
-	    learn_data.calc_MRH(bin_list, show_figs = False)
-	    plt1 = learn_data.MRH[0]
-	    plt2 = learn_data.MRH[1]
-	    learn_data.calc_heights(plt1,plt2)
 
-	    dataset.append(learn_data)
+		learn_data = test_obj((256, 256))
+		learn_data.rand_im_gen(1)
+
+		learn_data.calc_GB(gauss_blur_list)
+		learn_data.calc_MRH(bin_list, show_figs = False)
+
+		plt1 = learn_data.MRH[0]
+		plt2 = learn_data.MRH[1]
+
+		learn_data.calc_heights(plt1,plt2)
+
+		dataset.append(learn_data)
+		prev_set.append(learn_data)
 
 
-
-	return prev_set.append(dataset)
+	return prev_set, backup
 
 def accuracy(test_x, test_y,
 			 classifier,
@@ -371,22 +424,30 @@ def accuracy(test_x, test_y,
 	Return
 	------
 	acc : float : accuracy of the neural network
+
+
 	"""
+
 	df_labels = pd.DataFrame()
-	df_labels["success"] = (train_y == classifier.predict(train_X))
+	df_labels["success"] = (test_y == classifier.predict(test_x))
 	t = 0
 	tot = len(df_labels['success'])
+
 	for i in df_labels['success']:
 		if i == True:
 			t += 1
+
 	if output == True:
 		print("Out of {} values, {} were True with an accuracy of {}".format(tot, t, t/tot))
+
 	acc = t/tot
+
 	return df_labels
 
 def neuralnet(dataset = [], NN_settings = None,
 			 train = False,
-			 save_settings = True):
+			 save_settings = True,
+			 print_acc = False):
 	"""
 	The following function is a wrapper function that will use a neural network in
 	order to best estimate the protein count of the input images. The solver used
@@ -404,31 +465,39 @@ def neuralnet(dataset = [], NN_settings = None,
 	NN_settings : object : classifier data
 	train : bool : decide on whether to train or test
 	save_settings : bool : decide on whether to save classifier data to 'data' folder
+	print_acc : bool : passes bool to accuracy() to tell function to print accuracy
 
 	Return
 	------
 	count : list : The counts of the input dataset
+
+
 	"""
-	assert (NN_settings != None or train == False) ("Neural Network should be training " +
-												   "if there is no settings inputed")
+
+	assert (NN_settings != None or train == True), "Neural Network should be training " \
+												   "if there is no settings inputed"
 
 	count = []
 	acc = []
 
 	if NN_settings == None:
-		classifier = MLPClassifier(solver="lbfgs")
+		classifier = MLPClassifier(solver="lbfgs") # using lbfgs (explained in docstring)
 		classifier.hidden_layer_sizes = (100,) # 1 hidden layer with 100 hidden units
 		classifier.activation = "tanh" # Using a tanh activation
+
 	else:
 		classifier = NN_settings
+
 	if train == True:
 		train_X = []
 		train_y = []
+		value = []
+		lrn_dataset = []
+		lrn_cnt = []
+
 		for k in range(len(dataset)):
-		#    lrn_dataset.append([])
 			value.append([])
 			for i in range(len(dataset[k].heights)//3):
-		        #print(i)
 				value[k].append(dataset[k].heights[i*3])
 
 		for k in range(len(dataset)):
@@ -437,10 +506,12 @@ def neuralnet(dataset = [], NN_settings = None,
 			for ht in value[k]:
 				lrn_dataset[k].append(ht[0])
 
+		train_X = lrn_dataset
+		train_y = lrn_cnt
 		classifier.fit(train_X, train_y)
 
 	if save_settings == True:
-		save_objects(classifier, name = 'classifier_info.dat')
+		save_objects([classifier], name = 'classifier_info.dat')
 
 	for image in dataset:
 		cnt = classifier.predict(image.data)
