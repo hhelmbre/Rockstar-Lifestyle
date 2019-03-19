@@ -3,8 +3,6 @@
 #Import necessary packages
 import numpy as np
 import scipy
-#from scipy.ndimage import gaussian_filter
-#from skimage.morphology import watershed
 from skimage.feature import peak_local_max
 from skimage import measure, morphology, segmentation, data, feature, filters
 from scipy import ndimage
