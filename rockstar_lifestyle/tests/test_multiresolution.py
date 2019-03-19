@@ -70,18 +70,3 @@ def test_diff_hist():
     heights = multiresolution.diff_hist(hist1_plot, hist2_plot)
     #asserts and checks
     return heights
-
-
-#Function 8: Test for plotting the full multi res histograms - This test times out takes very long to run
-# def test_Multi_res_hist_full():
-#     """Wraps all functions and produces a plot of height comparisons"""
-# #inputs for functions
-#     image = Image.open('Test_Photo_fromMike.png')
-#     desired_color = 'g'
-#     image = fouriertransform.color_split_image(image, desired_color)
-#     bin_list = [3]
-#     gauss_blur_list = [0,1]
-# # running functions
-#     MultiresHist.Multi_res_hist_full(image, bin_list, gauss_blur_list)
-# #asserts and checks
-#     return
