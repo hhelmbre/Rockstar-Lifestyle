@@ -1,7 +1,7 @@
-from rockstar_lifestyle import multiresolution as mH
-from rockstar_lifestyle import training_images as tI
-from rockstar_lifestyle import imcrop as iC
-from rockstar_lifestyle import objects
+from rockstarlifestyle import multiresolution as mH
+from rockstarlifestyle import training_images as tI
+from rockstarlifestyle import imcrop as iC
+from rockstarlifestyle import objects
 
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
