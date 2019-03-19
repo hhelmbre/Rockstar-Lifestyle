@@ -88,6 +88,9 @@ def test_object_area_hist():
 def test_centroid_distance():
     #inputs for functions
     #running the functions
+    otsu_global_labels = global_labels(image)
+    properties_global = measure.regionprops(otsu_global_labels)
+    image_centroid = properties_global[0].centroid
     distance = objects.centroid_distance(image_centroid, object_centroid, row)
     #asserts and checks
     return
