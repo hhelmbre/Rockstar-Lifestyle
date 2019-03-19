@@ -37,9 +37,9 @@ class tileData():
 class imgID():
     # Creating an identifier for every image for later use in neural network
     def __init__(self, name,
-    			 image):
+    			 data):
         self.name = name
-        self.image = image
+        self.data = data
         self.MRH = []
         self.GB = []
         self.bin_list = []
@@ -54,13 +54,14 @@ class imgID():
     			 show_figs = False):
         cumulative_data = []
         if self.GB == []:
-            warnings.warn("Gaussian blur needs to be performed before Multi Res Histogram")
+            warnings.warn("Gaussian blur needs to be performed " +
+            			 "before Multi Res Histogram")
         self.MRH = mH.cumulative_hist(self.GB, bins, show_figs = show_figs)
         for i in range(len(self.MRH[0][:])):
             self.bin_list.append(self.MRH[i][1])
 
     def calc_GB(self, gauss_blur_list):
-        self.GB = mH.gauss_filter(self.image, gauss_blur_list)
+        self.GB = mH.gauss_filter(self.data, gauss_blur_list)
 
 def stackMRH(stacked_img):
 	"""
@@ -78,7 +79,8 @@ def stackMRH(stacked_img):
 	objlist = []
 	for k in range(len(stacked_img[:,:,0])):
 		plt = []
-		obj = imgID(dict({'Image' : '{}/{}'.format((k+1),len(stacked_img[:,:,0]))}), stacked_img[k,:,:])
+		obj = imgID(dict({'Image' : '{}/{}'.format((k+1),len(stacked_img[:,:,0]))}),
+				   stacked_img[k,:,:])
 		obj.calc_GB(gauss_blur_list)
 		obj.calc_MRH(bin_list, show_figs = False)
 		plt1 = obj.MRH[0]
@@ -138,11 +140,13 @@ def imgCrop(path = '', file = '',
 		stacked_img : np.uint16 : (n, res_x, res_y) array of n stacks of
 								  cropped images
 		"""
-		metadata = json.dumps({"res" : td.res, "orig_Img" : td.file, "dtype" : stacked_img.dtype.str})
+		metadata = json.dumps({"res" : td.res, "orig_Img" : td.file,
+							 "dtype" : stacked_img.dtype.str})
 
 		ij = False # For future work with tif ij filetypes
 		if ij == True: metadata = {"Info": metadata}
-		tifffile.imsave('{}stack_crop_RES{}_{}{}'.format(td.path, td.res, td.file, '.tif'), stacked_img, metadata = metadata, imagej = ij)
+		tifffile.imsave('{}stack_crop_RES{}_{}{}'.format(td.path, td.res, td.file, '.tif'),
+					   stacked_img, metadata = metadata, imagej = ij)
 
 	def __crop(td):
 		"""
@@ -186,7 +190,8 @@ def imgCrop(path = '', file = '',
 	assert len(res) == 2, "Input resolution can only be 2 values"
 
 	if filetype != '.png':
-		warnings.warn("The input filetype needs to be a .png for the current version. This will change in future versions")
+		warnings.warn("The input filetype needs to be a .png for the current " +
+					 "version. This will change in future versions")
 		filetype = '.png'
 
 	stacked_img = np.zeros(shape = (0, 0, 0, 0), dtype = 'uint16')
