@@ -7,7 +7,7 @@ import scipy
 from scipy.ndimage import gaussian_filter
 import timeit
 #importing file functions
-from rockstar_lifestyle import multiresolution, preprocessing
+from rockstarlifestyle import multiresolution, preprocessing
 
 #Function 3: Test of Gaussian Filter Application
 def test_gauss_filter():

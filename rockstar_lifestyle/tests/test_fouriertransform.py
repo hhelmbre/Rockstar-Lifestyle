@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image, ImageFilter, ImageEnhance
 #import internal packages
-from rockstar_lifestyle import fouriertransform, preprocessing
+from rockstarlifestyle import fouriertransform, preprocessing
 
 
 
