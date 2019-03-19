@@ -10,7 +10,7 @@ from rockstarlifestyle import edges, fouriertransform, preprocessing
 def test_high_pass_filter():
     """Test: creates an image that has a high pass filter applied"""
     #inputs for the functions
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radius = 80
     desired_color = "b"
     #function performance
@@ -26,7 +26,7 @@ def test_high_pass_filter():
 def test_HPF_compare():
     """Test: Plots the image and the high pass filter image for comparison"""
     #inputs for the functions
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radius = 80
     desired_color = "b"
     #function performance
@@ -41,7 +41,7 @@ def test_HPF_compare():
 def test_low_pass_filter():
     """Test: creates an image that has a low pass filter applied """
     #function inputs
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radius = 80
     desired_color = "b"
     #function performance
@@ -57,7 +57,7 @@ def test_low_pass_filter():
 def test_LPF_compare():
     """Test: Plots the image and the low pass filter image for comparison"""
     #input for function
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radius = 80
     desired_color = "b"
     #run function
@@ -70,7 +70,7 @@ def test_LPF_compare():
 def test_band_pass_filter():
     """Test: creates an image that has a low pass filter applied"""
     #function inputs
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radiusin = 50
     radiusout = 100
     desired_color = "b"
@@ -88,7 +88,7 @@ def test_band_pass_filter():
 def test_BPF_compare():
     """Test: Plots the image and the low pass filter image for comparison"""
     #function Inputs
-    image = Image.open('Test_Photo_fromMike.png')
+    image = Image.open('../data/protein_matrix_image.png')
     radiusin = 50
     radiusout = 100
     desired_color = "b"
