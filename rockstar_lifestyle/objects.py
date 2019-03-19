@@ -26,7 +26,7 @@ def global_binary(image):
 
 #Function 2: Obtaining the Local Adaptive Threshold Binary
 def local_binary(image, block_size):
-    """obtains th ebinary of the image using a local adaptive threshold"""
+    """obtains the binary of the image using a local adaptive threshold"""
     image_arr = np.array(image)
     adaptive_thresh = filters.threshold_local(image_arr,
                                                     block_size, offset=8)
