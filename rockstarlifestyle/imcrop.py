@@ -10,7 +10,7 @@ import tifffile
 
 import warnings
 
-from rockstar_lifestyle import multiresolution as mH
+from rockstarlifestyle import multiresolution as mH
 
 #
 # Made by: Rockstar-Lifestyle | UW DIRECT | 2019
