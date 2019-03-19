@@ -1,12 +1,12 @@
-#Purpose: create filters to go over images in an effort to extract 
-#infomation 
+#Purpose: create filters to go over images in an effort to extract
+#infomation
 
 #import external packages
 from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #import internal packages
-from rockstar_lifestyle import fouriertransform, edges, preprocessing
+from rockstarlifestyle import fouriertransform, edges, preprocessing
 
 #Function 1: Performs a High Pass Filter and returns the modifed image
 #Steps:fourier transform,create and apply mask, unshift and untransform
@@ -17,7 +17,7 @@ def high_pass_filter(image, radius, desired_color):
     """Creates an image that has a high pass filter applied"""
     #Forier transform the image and return fshift.
     fshift = preprocessing.color_split_fshift(image, desired_color)
-    #Build array that masks the entire image  
+    #Build array that masks the entire image
     #Circle of zeros in array of ones
     row, column = image.size
     center_row = int(row/2)
@@ -102,7 +102,7 @@ def LPF_compare(image, radius, desired_color):
 
 
 #Function 5: Performs a Band Pass Filter and returns the modifed image
-#Steps: fourier transform, create mask, apply mask, 
+#Steps: fourier transform, create mask, apply mask,
 # and then inverse fourier transform
 #Inputs: image and desired internal and external radius, desired color
 #Outputs: image that has been filtered
@@ -137,7 +137,7 @@ def band_pass_filter(image, radiusin, radiusout, desired_color):
 def BPF_compare(image, radiusin, radiusout, desired_color):
     """plots the band pass filter versus the input image"""
     #gets the bpf image
-    bpf_image = edges.band_pass_filter(image, radiusin, 
+    bpf_image = edges.band_pass_filter(image, radiusin,
                                        radiusout, desired_color)
     #create subplot
     fig, axs = plt.subplots(1,2, figsize = (30,30))

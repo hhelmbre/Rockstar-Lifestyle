@@ -3,7 +3,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #from function files
-from rockstar_lifestyle import training_images
+from rockstarlifestyle import training_images
 
 
 #Function 1: Generates images with random pixels
@@ -130,7 +130,7 @@ def pix_count_im_circles(array, array_index):
     return black, obj_normalized
 
 #Function 6: Runs the previous pixel counter for all requested images
-#Steps: Loops through images and run index, circles, background, total. 
+#Steps: Loops through images and run index, circles, background, total.
 #Inputs: the image array from im_gen_circles
 #Outputs: dataframe containing index, circles, black pixels, and total.
 
@@ -201,7 +201,7 @@ def pix_count_im_rect(array, array_index):
 
 
 #Function 9: Runs the previous pixel counter for all requested images
-#Steps: loops through images from im_gen_rect and runs pix_count_im 
+#Steps: loops through images from im_gen_rect and runs pix_count_im
 #for each image
 #Inputs: array from im_gen_rect
 #Outputs: dataframe containing index, rectangles, black pixels and total

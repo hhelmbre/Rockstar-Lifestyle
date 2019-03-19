@@ -4,7 +4,7 @@ import pandas as pd
 from PIL import Image, ImageDraw
 from random import randint
 #import function packages
-from rockstar_lifestyle import training_images
+from rockstarlifestyle import training_images
 
 #From training_images function folder:
 
@@ -39,7 +39,7 @@ def test_pix_count_im_circles():
     assert black + obj_normalized * 69 == 62500, "the total pixel number is not correct"
     return
 
-#Function 3: Test of the pixel counter for all circle arrays 
+#Function 3: Test of the pixel counter for all circle arrays
 def test_pixel_counter_whole_array_circles():
     """Test: Counts the number of pixels for the array of circle images"""
     #function Inputs

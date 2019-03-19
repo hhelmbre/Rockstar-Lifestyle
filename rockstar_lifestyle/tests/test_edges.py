@@ -3,12 +3,12 @@ from PIL import Image, ImageFilter, ImageEnhance
 import numpy as np
 from matplotlib import pyplot as plt
 #code files that are within the tests
-from rockstar_lifestyle import edges, fouriertransform, preprocessing
+from rockstarlifestyle import edges, fouriertransform, preprocessing
 
 
 #Function 1: Test of high pass filter function from edges
 def test_high_pass_filter():
-    """Test: takes an image and modifiable radius and performs a forier transform and outputs an image that has a high pass filter applied"""
+    """Test: creates an image that has a high pass filter applied"""
     #inputs for the functions
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -39,7 +39,7 @@ def test_HPF_compare():
 
 #Function 3: Test of low pass filter function from edges
 def test_low_pass_filter():
-    """Test: takes an image and modifiable radius and performs a fourier transform and outputs and image that has a low pass filter applied """
+    """Test: creates an image that has a low pass filter applied """
     #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radius = 80
@@ -68,7 +68,7 @@ def test_LPF_compare():
 
 #Function 5: Test of band pass filter functions from edges
 def test_band_pass_filter():
-    """Test: takes an image and modifiable radii and performs a fourier transform and outputs and image that has a low pass filter applied"""
+    """Test: creates an image that has a low pass filter applied"""
     #function inputs
     image = Image.open('Test_Photo_fromMike.png')
     radiusin = 50
