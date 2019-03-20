@@ -1,5 +1,5 @@
 <p>
-	<img src="https://raw.githubusercontent.com/hhelmbre/Rockstar-Lifestyle/master/Logo.png" width="10%" align="left">
+	<img src="https://github.com/hhelmbre/Rockstar-Lifestyle/blob/master/doc/Logo.png" width="10%" align="left">
 </p>
 
 # Rockstar-Lifestyle
