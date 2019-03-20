@@ -12,8 +12,8 @@ image.  These patterns obtained can then be characterized based on the
 neural network, trained through images generated as part of this package.  
 The pakcage can be extended to use with various other types of protein 
 visualization images although the initial intent was to use it with 
-whole-cell staining. Referring to the ....... poster will provide a more 
-specific overview of the project. 
+whole-cell staining. Referring to the poster in the doc directory will 
+provide a more specific overview of the project. 
 
 ### How to Install
 
@@ -27,41 +27,47 @@ specific overview of the project.
 
 ## Organization of the project
 ```
-**RockstarLifestyle/**
+**rockstarlifestyle/**
+	**data/**
+		classifier_info.dat
+		protein_matrix_image.png
+		stacked_img_test.dat
+		training_set.dat
 	**tests/**
-		Test_Photo_fromMike.png
-		_init.py
-		test_Filter_Functions.py
+		_init_.py
+		test_edges.py
 		test_fouriertransform.py
-		test_image_training_shapes.py
-		test_multiresHist.py
+		test_multiresolution.py
+		test_objects.py
 		test_preprocessing.py
-	Filter_Functions.py
-	Image_training_circles.py
-	Image_training_overlap.py
-	Image_training_pixels.py
-	Image_training_rectangles.py
-	MultiresHist.py
-	ObjectStats.py
-	Test_Photo_fromMike.py
+		test_training_images.py
 	_init_.py
+	edges.py
 	fouriertransform.py
 	imcrop.py
+	multiresolution.py
+	neuralnet.py
+	objects.py
 	preprocessing.py
+	training_images.py
 **Images/**
 	P10_LPS_ipsi_40x_hippo_scan_MaxIP.png
 	P14_healthy_40x_hippo_scan_MaxIP.png
 	P35_LPS_ipsi_40x_hippo_scan_MaxIP.png
 **examples/**
-	EdgeStatistics.ipynb
+	HowTo--edges.py.ipynb
 	Functionalized-Multires-histograms.ipynb
-	Image_Unit_Tests.ipynb
 	Object-Statistics.ipynb
-	Test_Photo_fromMike.png
 	Training_Images_Examples.ipynb
-	UseCases.MD
 	first-four-moments.ipynb
 	fourier_transform-with-multires-hist.ipynb
+	imcrop_demo.ipynb
+**doc/**
+	componentsketch.pdf
+	poster.pdf
+	tech_review.pdf
+	use_cases.MD
+	Logo.png
 .gitignore
 License.txt
 README.md
@@ -73,16 +79,17 @@ setup.py
 ## Usage
 
 
+
 ## Contributing
 
 Pull requests accepted through hhelmbre/Rockstar-Lifestyle
 
 ## Authors
 
-Julia Boese - jnboese
-Hawley Helmbrecht - hhelmbre
-Sage Scheiwiller - SageScheiwiller
-David Shackelford - dash2927
+Julia Boese - jnboese  
+Hawley Helmbrecht - hhelmbre  
+Sage Scheiwiller - SageScheiwiller  
+David Shackelford - dash2927  
 
 ## License
 ```
