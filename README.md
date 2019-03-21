@@ -6,19 +6,23 @@
 ## Protein Characteriziation Package
 This package can be used to take fluorescence microscopy images of cell 
 staining, run the data through a fast-fourier transform to obtain 
-localization information, apply the localization information data to a 
+localization information, tested for edge and object statistics, and then 
+the localization data and edge and object stats can be applied to a 
 multi-resolution histogram which provides patterning information from the 
-image.  These patterns obtained can then be characterized based on the 
-neural network, trained through images generated as part of this package.  
-The pakcage can be extended to use with various other types of protein 
-visualization images although the initial intent was to use it with 
-whole-cell staining. Referring to the poster in the doc directory will 
-provide a more specific overview of the project. 
+image. These patterns, edge stats, and object stats obtained can then be 
+characterized based on the neural network, that was trained trained through
+a set of images generated as part of this package and in the future of this
+package also trained through a data set of well-characterized images from 
+published studies. The package can be extended to use with various other 
+types of protein visualization images although the initial intent was to 
+use it with whole-cell staining of neural images. Referring to the poster 
+in the doc directory will provide a more specific overview of the project. 
 
 ### How to Install
 
-1. Use `git clone` to clone repository
-2. Use ` pip install .` to install and run functions
+1. Use `git clone` to clone repository into your desired directory
+2. Use ` pip install .` to install the package from the `setup.py` file
+3. Run functions
   
 ### Software Dependencies
 - Python3
@@ -78,7 +82,20 @@ setup.py
 
 ## Usage
 
-
+To use this package it is best to begin with the functions in the 
+`preprocessing.py` file to enhance the contrast of the images and splits
+the colors. Then using the `imcrop.py` functions one can crop images into 
+equal 250x250 resolution images that can eventually be run through the neural
+network functions of `neuralnet.py`.  Images can also be run through the
+functions in `fouriertransform.py` and `multiresolution.py` to obtain the
+fourier transform of each image as well as the multi-resolution histogram
+for each image.  Additionally, the images can be used with the functions in 
+`objects.py` and `edges.py` to obtain object and edge statistics. For 
+training the neural network one can use the `training_images.py` file to
+generate images for training purposes.  For other ways to train the neural
+one can use any images they desire and run them through the functions as 
+documented above. Examples of usage for each `.py` file is provided in the 
+`examples` directory.
 
 ## Contributing
 
