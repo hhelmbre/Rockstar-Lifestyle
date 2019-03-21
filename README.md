@@ -118,4 +118,6 @@ teaching assistants in the DIRECT program, especially Chad Curtis, for all
 of their help and guidance with the development of this project.
 
 We would also like to thank the Nance Lab and the University of Washington 
-for providing the testing images.  
+for providing the testing images. Continuing, the training images within
+the `Images` were obtained from the groups they are named after. The journal ids
+are as follows, pbio.1001041, ASN.2013091017, ppat.1000100, and PMC2361341.
