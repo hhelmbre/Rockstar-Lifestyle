@@ -33,7 +33,7 @@ def test_img_crop():
     """
     file = 'P10_PAM_ipsi_40x_hippo_scan_MaxIP'
     filetype = '.png'
-    path = r"../Images/"
+    path = r"../../Images/"
     res_x = 256
     res_y = 256
     im_path = path + file+ filetype
