@@ -52,8 +52,8 @@ class ImgID():
     def __init__(self, name, data):
         self.name = name
         self.data = data
-        self.MRH = []
-        self.GB = []
+        self.mrh = []
+        self.gb = []
         self.bin_list = []
         self.heights = []
         self.count = []
@@ -63,26 +63,26 @@ class ImgID():
         Calculates height data from plt1 and plt2
         """
         self.heights = mH.diff_hist(plt1, plt2)
-    def calc_MRH(self, bins, show_figs=False):
+    def calc_mrh(self, bins, show_figs=False):
         """
         Calculating multires histogram
         """
-        if self.GB == []:
+        if self.gb == []:
             warnings.warn("Gaussian blur needs to be performed " +
                           "before Multi Res Histogram")
-        self.MRH = mH.cumulative_hist(self.GB,
+        self.mrh = mH.cumulative_hist(self.gb,
                                       bins,
                                       show_figs=show_figs)
-        for i in range(len(self.MRH[0][:])):
-            self.bin_list.append(self.MRH[i][1])
+        for i in range(len(self.mrh[0][:])):
+            self.bin_list.append(self.mrh[i][1])
 
-    def calc_GB(self, gauss_blur_list):
+    def calc_gb(self, gauss_blur_list):
         """
         Calculating Gaussian Blur
         """
-        self.GB = mH.gauss_filter(self.data, gauss_blur_list)
+        self.gb = mH.gauss_filter(self.data, gauss_blur_list)
 
-def stackMRH(stacked_img):
+def stackmrh(stacked_img):
     """
     Parameters
     ----------
@@ -104,15 +104,15 @@ def stackMRH(stacked_img):
             {'Image' : '{}/{}'.format((k + 1),
                                       len(stacked_img[:, :, 0]))}),
                     stacked_img[k, :, :])
-        obj.calc_GB(gauss_blur_list)
-        obj.calc_MRH(bin_list, show_figs=False)
-        plt1 = obj.MRH[0]
-        plt2 = obj.MRH[1]
+        obj.calc_gb(gauss_blur_list)
+        obj.calc_mrh(bin_list, show_figs=False)
+        plt1 = obj.mrh[0]
+        plt2 = obj.mrh[1]
         obj.calc_heights(plt1, plt2)
         objlist.append(obj)
     return objlist
 
-def stackLoad(path='', file=''):
+def stack_load(path='', file=''):
     """
     The following function loads the given cropped stacked image into a
     numpy array
@@ -128,10 +128,10 @@ def stackLoad(path='', file=''):
     return sio.imread('{}{}.tif'.format(path, file))
 
 
-def imgCrop(path='',
-            file='',
-            filetype='.png',
-            res=(256, 256)):
+def img_crop(path='',
+             file='',
+             filetype='.png',
+             res=(256, 256)):
     """
     The following function acts as a wrapper for the entire py file. It
     will input an image file and given resolution and output a stacked
@@ -201,7 +201,7 @@ def imgCrop(path='',
         """
 
         img_list = []
-        # Change this to change RGB band (0 == R; 1 == G; 2 == B)
+        # Change this to change Rgb band (0 == R; 1 == G; 2 == B)
         _img = tile_data.data[:, :, 1]
         res_x = tile_data.res[0]
         res_y = tile_data.res[1]
