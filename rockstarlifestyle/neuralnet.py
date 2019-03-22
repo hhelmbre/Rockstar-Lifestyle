@@ -603,9 +603,12 @@ def neuralnet(dataset=None,
     lrn_dataset = None
     lrn_cnt = None
 
+    if not train:
+        save_settings = False
+
     assert (nn_settings is not None
-        or train), "Neural Network should be training " \
-                   "if there is no settings inputed"
+            or train), "Neural Network should be training " \
+                       "if there is no settings inputed"
 
     count = []
     acc = []
@@ -621,38 +624,37 @@ def neuralnet(dataset=None,
     else:
         classifier = nn_settings
 
+
+    train_x = []
+    train_y = []
+    value = []
+    lrn_dataset = []
+    lrn_cnt = []
+
+    for k in range(len(dataset)):
+        value.append([])
+        for i in range(len(dataset[k].heights)//3):
+            value[k].append(dataset[k].heights[i*3])
+
+    for k in range(len(dataset)):
+        lrn_dataset.append([])
+        lrn_cnt.append(dataset[k].count)
+        for ht_val in value[k]:
+            lrn_dataset[k].append(ht_val[0])
+    train_x = lrn_dataset
+    train_y = lrn_cnt
+
     if train:
-        train_x = []
-        train_y = []
-        value = []
-        lrn_dataset = []
-        lrn_cnt = []
-
-        for k in range(len(dataset)):
-            value.append([])
-            for i in range(len(dataset[k].heights)//3):
-                value[k].append(dataset[k].heights[i*3])
-
-        for k in range(len(dataset)):
-            lrn_dataset.append([])
-            lrn_cnt.append(dataset[k].count)
-            for ht_val in value[k]:
-                lrn_dataset[k].append(ht_val[0])
-        train_x = lrn_dataset
-        train_y = lrn_cnt
         classifier.fit(train_x, train_y)
 
     if save_settings:
         save_objects([classifier], name='classifier_info.dat')
 
-    for image in dataset:
-        cnt = classifier.predict(image.data)
-        count.append(cnt)
-        acc.append(accuracy(image.data, cnt,
+    count = classifier.predict(train_x)
+    acc.append(accuracy(train_x, count,
                         classifier,
                         output=print_acc))
     if train:
         print("Training complete")
         return
-    else:
-        return count
+    return count
