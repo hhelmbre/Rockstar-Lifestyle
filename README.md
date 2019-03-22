@@ -41,7 +41,9 @@ in the doc directory will provide a more specific overview of the project.
 		_init_.py
 		test_edges.py
 		test_fouriertransform.py
+		test_imcrop.py
 		test_multiresolution.py
+		test_neuralnet.py
 		test_objects.py
 		test_preprocessing.py
 		test_training_images.py
@@ -56,16 +58,21 @@ in the doc directory will provide a more specific overview of the project.
 	training_images.py
 **Images/**
 	P10_LPS_ipsi_40x_hippo_scan_MaxIP.png
+	P10_PAM_ipsi_40x_hippo_scan_MaxIP.png
 	P14_healthy_40x_hippo_scan_MaxIP.png
 	P35_LPS_ipsi_40x_hippo_scan_MaxIP.png
+	gjerstorff_et_al.png
+	ma_et_al.jpg
+	salsman_et_al.png
+	shu_et_al.png
 **examples/**
 	HowTo--edges.py.ipynb
 	Functionalized-Multires-histograms.ipynb
 	Object-Statistics.ipynb
 	Training_Images_Examples.ipynb
-	first-four-moments.ipynb
 	fourier_transform-with-multires-hist.ipynb
 	imcrop_demo.ipynb
+	neural_network_demo.ipynb
 **doc/**
 	componentsketch.pdf
 	poster.pdf
@@ -75,7 +82,6 @@ in the doc directory will provide a more specific overview of the project.
 .gitignore
 License.txt
 README.md
-Rockstar-Lifestyle-Logo.png
 requirements.txt
 setup.py
 ```
@@ -119,5 +125,6 @@ of their help and guidance with the development of this project.
 
 We would also like to thank the Nance Lab and the University of Washington 
 for providing the testing images. Continuing, the training images within
-the `Images` were obtained from the groups they are named after. The journal ids
-are as follows, pbio.1001041, ASN.2013091017, ppat.1000100, and PMC2361341.
+the `Images` directory were obtained from the groups they are named after. 
+The journal ids are as follows, pbio.1001041, ASN.2013091017, ppat.1000100, 
+and PMC2361341.
