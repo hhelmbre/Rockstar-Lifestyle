@@ -330,47 +330,8 @@ def save_objects(dataset, name='untitled.dat'):
 
     Return
     ------
-    One big 'ol thicc pickle
+    One big 'ol pickle
 
-    Baby Dill
-    ---------
-    Whilst walking down the street one day,
-    I saw upon the drain,
-    A little green dill pickle,
-    That was beaten by the rain.
-
-    I picked it up and took it,
-    To my house upon the hill.
-    I placed it in a tiny bed.
-    I named it, Baby Dill.
-
-    I nursed it back to bright green health.
-    Its flesh was plump and firm.
-    Whenever I would touch it,
-    I'm sure I saw it squirm.
-
-    One day when I noticed,
-    My babies wrinkly skin.
-    I grabbed a jar of pickle juice,
-    And I promptly threw it in.
-
-    Within a couple of hours,
-    I thought I'd better check.
-    My baby dill was missing.
-    I was just a wreck.
-
-    That's when I saw my brother,
-    He was sitting in his chair.
-    Eating my dill pickle.
-    As if he didn't care.
-
-    This was the hardest lesson,
-    I've ever had to learn.
-    Now I can't eat pickles.
-    They make my stomach turn.
-
-    - Thomas Plue 2009
-    (sorry)
     """
 
     if ".dat" not in name:
