@@ -134,7 +134,21 @@ class TestObj():
             # adds new array to the list of arrays
             imgarray.append(array)
         self.data = np.array(img, dtype=float)
-        self.count = self.pix_count_array
+        """
+        Counts number of pixels in array
+        """
+        array = self.data
+        i = 0
+        pixel_count = pd.DataFrame(columns=['Index', 'Object',
+                                            'Black', 'Total'])
+        # counts through the 'images' in given array
+        for i in range(0, len(array)):
+            array_index = i
+            black, obj = self._pix_count_im(array, array_index)
+            total = obj
+            #sums up the pixels counted; should be 62500
+            pixel_count.loc[i] = [i, obj, black, total]
+        self.count = pixel_count['Object'][0]
 
     def _pix_count_im(self, array, array_index):
         """
@@ -168,7 +182,7 @@ class TestObj():
             total = obj
             #sums up the pixels counted; should be 62500
             pixel_count.loc[i] = [i, obj, black, total]
-        self.count = pixel_count['Object'][0]
+        return pixel_count['Object'][0]
 
     def im_gen_rect(self, n, res=(256, 256)):
         # Generates images with random rectangles on background
@@ -393,6 +407,8 @@ def load_objects(name='untitled.dat'):
 
 
     """
+    pickle._dill._reverse_typemap['ClassType'] = type
+
     if ".dat" not in name:
         name = name.rsplit('.', 1)[0] + ".dat"
         warnings.warn("File saved does not end in '.dat', will "\
@@ -635,5 +651,8 @@ def neuralnet(dataset=None,
         acc.append(accuracy(image.data, cnt,
                         classifier,
                         output=print_acc))
-
-    return count
+    if train:
+        print("Training complete")
+        return
+    else:
+        return count
